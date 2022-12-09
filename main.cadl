@@ -1,2 +1,29 @@
 import "@cadl-lang/rest";
-import "@cadl-lang/openapi3";
+
+@service({
+  title: "Widget Service",
+  version: "1.0.0"
+})
+namespace DemoService;
+using Cadl.Http;
+
+model Widget {
+  @path id: string;
+  weight: int32;
+  color: "red" | "blue";
+}
+
+@error
+model Error {
+  code: int32;
+  message: string;
+}
+
+@route("/widgets")
+@tag("Widgets")
+interface Widgets {
+  @get list(): Widget[] | Error;
+  @get read(@path id: string): Widget | Error;
+  @post create(@body body: Widget): Widget | Error;
+  @route("analyze") @post analyze(): string | Error;
+}
