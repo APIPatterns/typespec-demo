@@ -16,3 +16,8 @@ View the SwaggerUI by choosing it from the dropdown in the right pane.
 
 Make a few small changes and then copy to the main.cadl file.
 
+## Cadl support for reuse
+
+Create library.cadl with Error model and ResourceTemplate templated interface.
+
+Refactor Widgets interface to use ResourceTemplate then add Gadgets interface.

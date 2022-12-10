@@ -1,0 +1,16 @@
+
+import "@cadl-lang/rest";
+
+using Cadl.Http;
+
+@error
+model Error {
+  code: int32;
+  message: string;
+}
+
+interface ResourceInterface<T> {
+    @get list(): T[] | Error;
+    @get read(@path id: string): T | Error;
+    @post create(@body body: T): T | Error;
+  }
