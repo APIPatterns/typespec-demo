@@ -51,3 +51,11 @@ Include an update operation (patch) that accepts JSON merge patch and a delete o
  DO create and update resources using PATCH [RFC5789] with JSON Merge Patch (RFC7396) request body.
 
 ✅ DO return a 204-No Content without a resource/body for a DELETE operation
+
+## API Guidelines -- api-version query parameter
+
+Update all operations in the ResourceTemplate interface to support versioning with an [api-version query parameter](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#api-versioning).
+
+✅ DO use a required query parameter named api-version on every operation for the client to specify the API version.
+
+✅ DO use YYYY-MM-DD date values, with a -preview suffix for preview versions, as the valid values for api-version.

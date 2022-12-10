@@ -35,10 +35,15 @@ model Patch<T> {
     ...T;
 }
 
+model ApiVersion {
+    @doc("The version of the API in the form YYYY-MM-DD")
+    @query("api-version") apiVersion: string;
+}
+
 interface ResourceInterface<T> {
-    @get list(): List<T> | Error;
-    @get read(@path id: string): T | Error;
-    @put create(@body body: T): T | Error;
-    @patch update(@body body: Patch<T>): T | Error;
-    @delete delete(@path id: string): void | Error;
+    @get list(...ApiVersion): List<T> | Error;
+    @get read(@path id: string, ...ApiVersion): T | Error;
+    @put create(@body body: T, ...ApiVersion): T | Error;
+    @patch update(@body body: Patch<T>, ...ApiVersion): T | Error;
+    @delete delete(@path id: string, ...ApiVersion): void | Error;
   }
