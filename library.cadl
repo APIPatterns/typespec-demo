@@ -4,9 +4,23 @@ import "@cadl-lang/rest";
 using Cadl.Http;
 
 @error
+@doc("Error response")
 model Error {
-  code: int32;
+    @doc("A server-defined code that uniquely identifies the error.")
+    @header("x-ms-error-code")
+    code: string;
+    @doc("Top-level error object")
+    error: ErrorDetail;
+}
+
+@doc("Error details")
+model ErrorDetail {
+  @doc("A server-defined code that uniquely identifies the error.")
+  code: string;
+  @doc("A human-readable representation of the error.")
   message: string;
+  @doc("An array of details about specific errors that led to this reported error.")
+  details?: ErrorDetail[];
 }
 
 interface ResourceInterface<T> {

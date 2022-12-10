@@ -21,3 +21,11 @@ Make a few small changes and then copy to the main.cadl file.
 Create library.cadl with Error model and ResourceTemplate templated interface.
 
 Refactor Widgets interface to use ResourceTemplate then add Gadgets interface.
+
+## API Guidelines -- error response
+
+Make the standard error response conform to the [Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors), in particular:
+
+✅ DO return an x-ms-error-code response header with a string error code indicating what went wrong.
+
+✅ DO provide a response body with the following structure:
