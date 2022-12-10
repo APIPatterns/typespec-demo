@@ -23,8 +23,22 @@ model ErrorDetail {
   details?: ErrorDetail[];
 }
 
+model List<T> {
+    @doc("List of elements")
+    value: T[];
+    @doc("A link to the next page of results if present.")
+    nextLink?: url;
+}
+
+model Patch<T> {
+    @header contentType: "application/merge-patch+json";
+    ...T;
+}
+
 interface ResourceInterface<T> {
-    @get list(): T[] | Error;
+    @get list(): List<T> | Error;
     @get read(@path id: string): T | Error;
-    @post create(@body body: T): T | Error;
+    @put create(@body body: T): T | Error;
+    @patch update(@body body: Patch<T>): T | Error;
+    @delete delete(@path id: string): void | Error;
   }
