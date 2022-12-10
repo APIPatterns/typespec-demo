@@ -1,5 +1,6 @@
 
 import "@cadl-lang/rest";
+import "./linter.js";
 
 using Cadl.Http;
 

@@ -59,3 +59,9 @@ Update all operations in the ResourceTemplate interface to support versioning wi
 ✅ DO use a required query parameter named api-version on every operation for the client to specify the API version.
 
 ✅ DO use YYYY-MM-DD date values, with a -preview suffix for preview versions, as the valid values for api-version.
+
+## Add linter for api-version
+
+Create linter.js to check operations for api-version and import into library.cadl.
+
+Run cadl compile to show that it flags the Widgets analyze operation as needing an api-version.
