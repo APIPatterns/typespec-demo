@@ -24,7 +24,7 @@ model Gadget {
 @route("/widgets")
 @tag("Widgets")
 interface Widgets extends ResourceInterface<Widget> {
-  @route("analyze") @post analyze(): string | Error;
+  @route("analyze") @post analyze(...ApiVersion): string | Error;
 }
 
 @route("/gadgets")
