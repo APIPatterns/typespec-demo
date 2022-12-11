@@ -25,6 +25,8 @@ model Gadget {
 @tag("Widgets")
 interface Widgets extends ResourceInterface<Widget> {
   @route("analyze") @post analyze(...ApiVersion): string | Error;
+  @route("{id}:start") start is lroPostAction<never>;
+  @route("/operations") @get getStatus(@path id: string, ...ApiVersion): StatusMonitor<never> | Error;
 }
 
 @route("/gadgets")

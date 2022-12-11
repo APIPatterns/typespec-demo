@@ -48,3 +48,17 @@ interface ResourceInterface<T> {
     @patch update(@body body: Patch<T>, ...ApiVersion): T | Error;
     @delete delete(@path id: string, ...ApiVersion): void | Error;
   }
+
+@post op lroPostAction<T>(@path id: string, ...ApiVersion): LroResponse & StatusMonitor<T> | Error;
+
+model LroResponse {
+    @statusCode code: 202;
+    @header operationLocation: string;
+}
+
+model StatusMonitor<T> {
+  id: string;
+  status: string;
+  error?: ErrorDetail;
+  result?: T;
+}
