@@ -5,7 +5,8 @@
   "dependencies": {
     "@cadl-lang/compiler": "latest",
     "@cadl-lang/rest": "latest",
-    "@cadl-lang/openapi3": "latest"
+    "@cadl-lang/openapi3": "latest",
+    "@cadl-lang/lint": "latest"
   },
   "private": true
 }
