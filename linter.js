@@ -41,9 +41,10 @@ const versionPolicyRule = createRule({
 
 const linter = getLinter(myLibrary);
 
+// Register and enable the version-policy linter rule.
+linter.registerRule(versionPolicyRule, { enable: true });
+linter.enableRule("myLibrary/version-policy");
+
 export function $onValidate(program) {
-  // Register and enable the version-policy linter rule.
-  linter.registerRule(versionPolicyRule, { enable: true });
-  linter.enableRule("myLibrary/version-policy");
   linter.lintOnValidate(program);
 }
