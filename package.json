@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "type": "module",
   "dependencies": {
-    "@cadl-lang/compiler": "latest",
-    "@cadl-lang/rest": "latest",
-    "@cadl-lang/openapi3": "latest",
-    "@cadl-lang/lint": "latest"
+    "@typespec/compiler": "latest",
+    "@typespec/http": "latest",
+    "@typespec/openapi3": "latest",
+    "@typespec/lint": "latest"
   },
   "private": true
 }

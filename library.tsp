@@ -1,5 +1,4 @@
-
-import "@cadl-lang/rest";
+import "@typespec/http";
 import "./linter.js";
 
 using Cadl.Http;

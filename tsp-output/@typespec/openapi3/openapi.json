@@ -1,0 +1,813 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Widget Service",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Widgets"
+    },
+    {
+      "name": "Gadgets"
+    }
+  ],
+  "paths": {
+    "/gadgets": {
+      "get": {
+        "tags": [
+          "Gadgets"
+        ],
+        "operationId": "Gadgets_list",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Gadget"
+                      },
+                      "x-typespec-name": "Gadget[]",
+                      "description": "List of elements"
+                    },
+                    "nextLink": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "A link to the next page of results if present."
+                    }
+                  },
+                  "required": [
+                    "value"
+                  ],
+                  "x-typespec-name": "List<Gadget>"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gadgets/{id}": {
+      "get": {
+        "tags": [
+          "Gadgets"
+        ],
+        "operationId": "Gadgets_read",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Gadget"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Gadgets"
+        ],
+        "operationId": "Gadgets_create",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ApiVersion"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Gadget"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GadgetCreateOrUpdate"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Gadgets"
+        ],
+        "operationId": "Gadgets_update",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/Gadget.id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Gadget"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/merge-patch+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "height": {
+                    "type": "number",
+                    "format": "float"
+                  },
+                  "width": {
+                    "type": "number",
+                    "format": "float"
+                  },
+                  "color": {
+                    "type": "string",
+                    "enum": [
+                      "green",
+                      "yellow"
+                    ],
+                    "x-typespec-name": "green | yellow"
+                  }
+                },
+                "x-typespec-name": "Patch<Gadget>"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Gadgets"
+        ],
+        "operationId": "Gadgets_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/widgets": {
+      "get": {
+        "tags": [
+          "Widgets"
+        ],
+        "operationId": "Widgets_list",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Widget"
+                      },
+                      "x-typespec-name": "Widget[]",
+                      "description": "List of elements"
+                    },
+                    "nextLink": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "A link to the next page of results if present."
+                    }
+                  },
+                  "required": [
+                    "value"
+                  ],
+                  "x-typespec-name": "List<Widget>"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/widgets/analyze": {
+      "post": {
+        "tags": [
+          "Widgets"
+        ],
+        "operationId": "Widgets_analyze",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/widgets/{id}": {
+      "get": {
+        "tags": [
+          "Widgets"
+        ],
+        "operationId": "Widgets_read",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Widget"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Widgets"
+        ],
+        "operationId": "Widgets_create",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ApiVersion"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Widget"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WidgetCreateOrUpdate"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Widgets"
+        ],
+        "operationId": "Widgets_update",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/Widget.id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Widget"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/merge-patch+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "weight": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "color": {
+                    "type": "string",
+                    "enum": [
+                      "red",
+                      "blue"
+                    ],
+                    "x-typespec-name": "red | blue"
+                  }
+                },
+                "x-typespec-name": "Patch<Widget>"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Widgets"
+        ],
+        "operationId": "Widgets_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "ApiVersion": {
+        "name": "api-version",
+        "in": "query",
+        "required": true,
+        "description": "The version of the API in the form YYYY-MM-DD",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Gadget.id": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Widget.id": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ErrorDetail"
+              }
+            ],
+            "description": "Top-level error object"
+          }
+        },
+        "description": "Error response",
+        "required": [
+          "error"
+        ]
+      },
+      "ErrorDetail": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "A server-defined code that uniquely identifies the error."
+          },
+          "message": {
+            "type": "string",
+            "description": "A human-readable representation of the error."
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            },
+            "x-typespec-name": "ErrorDetail[]",
+            "description": "An array of details about specific errors that led to this reported error."
+          }
+        },
+        "description": "Error details",
+        "required": [
+          "code",
+          "message"
+        ]
+      },
+      "Gadget": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number",
+            "format": "float"
+          },
+          "width": {
+            "type": "number",
+            "format": "float"
+          },
+          "color": {
+            "type": "string",
+            "enum": [
+              "green",
+              "yellow"
+            ],
+            "x-typespec-name": "green | yellow"
+          }
+        },
+        "required": [
+          "id",
+          "height",
+          "width",
+          "color"
+        ]
+      },
+      "GadgetCreateOrUpdate": {
+        "type": "object",
+        "properties": {
+          "height": {
+            "type": "number",
+            "format": "float"
+          },
+          "width": {
+            "type": "number",
+            "format": "float"
+          },
+          "color": {
+            "type": "string",
+            "enum": [
+              "green",
+              "yellow"
+            ],
+            "x-typespec-name": "green | yellow"
+          }
+        },
+        "required": [
+          "height",
+          "width",
+          "color"
+        ]
+      },
+      "Widget": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "weight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "color": {
+            "type": "string",
+            "enum": [
+              "red",
+              "blue"
+            ],
+            "x-typespec-name": "red | blue"
+          }
+        },
+        "required": [
+          "id",
+          "weight",
+          "color"
+        ]
+      },
+      "WidgetCreateOrUpdate": {
+        "type": "object",
+        "properties": {
+          "weight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "color": {
+            "type": "string",
+            "enum": [
+              "red",
+              "blue"
+            ],
+            "x-typespec-name": "red | blue"
+          }
+        },
+        "required": [
+          "weight",
+          "color"
+        ]
+      }
+    }
+  }
+}
