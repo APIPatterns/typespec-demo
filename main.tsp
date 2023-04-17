@@ -1,5 +1,4 @@
 import "@typespec/http";
-import "@typespec/rest";
 import "./linter.js";
 
 using TypeSpec.Http;

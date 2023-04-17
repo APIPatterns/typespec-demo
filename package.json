@@ -5,7 +5,6 @@
   "dependencies": {
     "@typespec/compiler": "latest",
     "@typespec/http": "latest",
-    "@typespec/rest": "latest",
     "@typespec/openapi3": "latest",
     "@typespec/lint": "latest"
   },
