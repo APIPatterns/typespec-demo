@@ -1,8 +1,8 @@
-import { createCadlLibrary } from "@cadl-lang/compiler";
-import { createRule, getLinter } from "@cadl-lang/lint";
-import { isQueryParam } from "@cadl-lang/rest/http";
+import { createTypeSpecLibrary } from "@typespec/compiler";
+import { createRule, getLinter } from "@typespec/lint";
+import { isQueryParam } from "@typespec/http";
 
-export const myLibrary = createCadlLibrary({
+export const myLibrary = createTypeSpecLibrary({
   name: "myLibrary",
   diagnostics: {
     // This diagnostic will be issued for any operation without an `api-version` query parameter.

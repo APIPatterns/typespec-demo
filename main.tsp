@@ -1,8 +1,15 @@
-
-import "@cadl-lang/rest";
+import "@typespec/http";
+import "@typespec/rest";
 import "./linter.js";
 
-using Cadl.Http;
+using TypeSpec.Http;
+
+@service({
+  title: "Widget Service",
+  version: "1.0.0"
+})
+namespace DemoService;
+
 
 @error
 @doc("Error response")
@@ -48,3 +55,29 @@ interface ResourceInterface<T> {
     @patch update(@body body: Patch<T>, ...ApiVersion): T | Error;
     @delete delete(@path id: string, ...ApiVersion): void | Error;
   }
+
+
+
+model Widget {
+  @path id: string;
+  weight: int32;
+  color: "red" | "blue";
+}
+
+model Gadget {
+  @path id: string;
+  height: float32;
+  width: float32;
+  color: "green" | "yellow";
+}
+
+@route("/widgets")
+@tag("Widgets")
+interface Widgets extends ResourceInterface<Widget> {
+  @route("analyze") @post analyze(...ApiVersion): string | Error;
+}
+
+@route("/gadgets")
+@tag("Gadgets")
+interface Gadgets extends ResourceInterface<Gadget> {
+}
