@@ -1,24 +1,24 @@
-# Cadl Demo
+# TypeSpec Demo
 
-This repo contains a demo of the Cadl API Design language.
+This repo contains a demo of the TypeSpec API Design language.
 
-## Create a new Cadl project
+## Create a new TypeSpec project
 
-Open the Cadl docs at https://aka.ms/cadl and click on the Installation tab.
+Open the TypeSpec docs at https://aka.ms/typespec and click on the Installation tab.
 
-Follow the steps there to create a new Cadl project.
+Follow the steps there to create a new TypeSpec project.
 
-## Create a new Cadl definition
+## Create a new TypeSpec definition
 
-Open the Cadl playground at https://aka.ms/trycadl and select the Http service example.
+Open the TypeSpec playground at https://aka.ms/trytypespec and select the Http service example.
 
 View the SwaggerUI by choosing it from the dropdown in the right pane.
 
-Make a few small changes and then copy to the main.cadl file.
+Make a few small changes and then copy to the main.tsp file.
 
-## Cadl support for reuse
+## TypeSpec support for reuse
 
-Create library.cadl with Error model and ResourceTemplate templated interface.
+Create library.tsp with Error model and ResourceTemplate templated interface.
 
 Refactor Widgets interface to use ResourceTemplate then add Gadgets interface.
 
@@ -62,6 +62,6 @@ Update all operations in the ResourceTemplate interface to support versioning wi
 
 ## Add linter for api-version
 
-Create linter.js to check operations for api-version and import into library.cadl.
+Create linter.js to check operations for api-version and import into library.tsp.
 
-Run cadl compile to show that it flags the Widgets analyze operation as needing an api-version.
+Run tsp compile to show that it flags the Widgets analyze operation as needing an api-version.
