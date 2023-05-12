@@ -46,6 +46,7 @@ model BaseThingymajig {
 
 @oneOf
 union widgetColors{Red:Color.Red, Blue: Color.Blue};
+
 model Widget extends BaseThingymajig {
   weight: int32;
   color?: widgetColors;
