@@ -21,7 +21,7 @@
         "tags": [
           "Gadgets"
         ],
-        "operationId": "GadgetsInterface_list",
+        "operationId": "GadgetsInterface_getGadgets",
         "parameters": [],
         "responses": {
           "200": {
@@ -73,71 +73,13 @@
             }
           }
         }
-      }
-    },
-    "/gadgets/{id}": {
-      "get": {
-        "tags": [
-          "Gadgets"
-        ],
-        "operationId": "GadgetsInterface_read",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Gadget"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": true,
-                "description": "A server-defined code that uniquely identifies the error.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
       },
-      "put": {
+      "post": {
         "tags": [
           "Gadgets"
         ],
-        "operationId": "GadgetsInterface_create",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        "operationId": "GadgetsInterface_createGadget",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -173,7 +115,56 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/GadgetCreateOrUpdate"
+                "$ref": "#/components/schemas/GadgetCreate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gadgets/{id}": {
+      "get": {
+        "tags": [
+          "Gadgets"
+        ],
+        "operationId": "GadgetsInterface_getGadgetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Gadget"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
               }
             }
           }
@@ -183,7 +174,7 @@
         "tags": [
           "Gadgets"
         ],
-        "operationId": "GadgetsInterface_update",
+        "operationId": "GadgetsInterface_updateGadget",
         "parameters": [
           {
             "name": "id",
@@ -266,7 +257,7 @@
         "tags": [
           "Gadgets"
         ],
-        "operationId": "GadgetsInterface_delete",
+        "operationId": "GadgetsInterface_deleteGadget",
         "parameters": [
           {
             "name": "id",
@@ -280,55 +271,6 @@
         "responses": {
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": true,
-                "description": "A server-defined code that uniquely identifies the error.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/gadgets/{id}/analyze": {
-      "post": {
-        "tags": [
-          "Gadgets"
-        ],
-        "operationId": "GadgetsInterface_analyze",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -679,7 +621,7 @@
         "tags": [
           "WingDing"
         ],
-        "operationId": "WingDingInterface_list",
+        "operationId": "WingDingInterface_getWingDings",
         "parameters": [],
         "responses": {
           "200": {
@@ -738,7 +680,7 @@
         "tags": [
           "WingDing"
         ],
-        "operationId": "WingDingInterface_read",
+        "operationId": "WingDingInterface_getWingDing",
         "parameters": [
           {
             "name": "id",
@@ -776,135 +718,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "WingDing"
-        ],
-        "operationId": "WingDingInterface_create",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WingDing"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": true,
-                "description": "A server-defined code that uniquely identifies the error.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WingDingCreateOrUpdate"
-              }
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "WingDing"
-        ],
-        "operationId": "WingDingInterface_update",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WingDing"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": true,
-                "description": "A server-defined code that uniquely identifies the error.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/merge-patch+json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "height": {
-                    "type": "number",
-                    "format": "float"
-                  },
-                  "width": {
-                    "type": "number",
-                    "format": "float"
-                  },
-                  "color": {
-                    "$ref": "#/components/schemas/Color"
-                  },
-                  "manufacturer": {
-                    "$ref": "#/components/schemas/ManufacturerUpdate"
-                  }
-                },
-                "x-typespec-name": "MergePatch<WingDing>"
               }
             }
           }
@@ -914,7 +727,7 @@
         "tags": [
           "WingDing"
         ],
-        "operationId": "WingDingInterface_delete",
+        "operationId": "WingDingInterface_deleteWingDing",
         "parameters": [
           {
             "name": "id",
@@ -996,6 +809,20 @@
           "manufacturer",
           "createdOn",
           "updatedOn"
+        ]
+      },
+      "BaseThingymajigCreate": {
+        "type": "object",
+        "properties": {
+          "color": {
+            "$ref": "#/components/schemas/Color"
+          },
+          "manufacturer": {
+            "$ref": "#/components/schemas/Manufacturer"
+          }
+        },
+        "required": [
+          "manufacturer"
         ]
       },
       "BaseThingymajigCreateOrUpdate": {
@@ -1097,6 +924,40 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/BaseThingymajig"
+          }
+        ]
+      },
+      "GadgetCreate": {
+        "type": "object",
+        "properties": {
+          "maxRPM": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "color": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "Yellow"
+                ]
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "Green"
+                ]
+              }
+            ],
+            "x-typespec-name": "Color.Yellow | Color.Green"
+          }
+        },
+        "required": [
+          "maxRPM"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseThingymajigCreate"
           }
         ]
       },
@@ -1202,6 +1063,26 @@
           }
         ]
       },
+      "WidgetCreate": {
+        "type": "object",
+        "properties": {
+          "weight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "color": {
+            "$ref": "#/components/schemas/widgetColors"
+          }
+        },
+        "required": [
+          "weight"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseThingymajigCreate"
+          }
+        ]
+      },
       "WidgetCreateOrUpdate": {
         "type": "object",
         "properties": {
@@ -1244,6 +1125,31 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/BaseThingymajig"
+          }
+        ]
+      },
+      "WingDingCreate": {
+        "type": "object",
+        "properties": {
+          "height": {
+            "type": "number",
+            "format": "float"
+          },
+          "width": {
+            "type": "number",
+            "format": "float"
+          },
+          "color": {
+            "$ref": "#/components/schemas/Color"
+          }
+        },
+        "required": [
+          "height",
+          "width"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseThingymajigCreate"
           }
         ]
       },

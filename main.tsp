@@ -140,16 +140,25 @@ interface ResourceInterface<T> {
 // Resource Interfaces
 @route("/widgets")
 @tag("Widgets")
-interface WidgetsInterface extends ResourceInterface<Widget>{
+interface WidgetsInterface extends ResourceInterface<Widget> {
   @route("{id}/analyze") @post analyze(@path id: string): string | Error;
 }
 
 @route("/gadgets")
 @tag("Gadgets")
-interface GadgetsInterface extends ResourceInterface<Gadget>{
-  @route("{id}/analyze") @post analyze(@path id: string): string | Error;
+interface GadgetsInterface {
+  getGadgets is list<Gadget>;
+  getGadgetById is read<Gadget>;
+  updateGadget is update<Gadget>;
+  deleteGadget is delete;
+  @post op createGadget(@body body: Gadget): Gadget | Error;
+
 }
 
 @route("/wingdings")
 @tag("WingDing")
-interface WingDingInterface extends ResourceInterface<WingDing>{};
+interface WingDingInterface {
+  getWingDings is list<WingDing>;
+  getWingDing is read<WingDing>;
+  deleteWingDing is delete;
+};
