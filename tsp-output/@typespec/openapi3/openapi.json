@@ -10,6 +10,9 @@
     },
     {
       "name": "Gadgets"
+    },
+    {
+      "name": "WingDing"
     }
   ],
   "paths": {
@@ -18,7 +21,7 @@
         "tags": [
           "Gadgets"
         ],
-        "operationId": "Gadgets_list",
+        "operationId": "GadgetsInterface_list",
         "parameters": [],
         "responses": {
           "200": {
@@ -51,7 +54,7 @@
         "tags": [
           "Gadgets"
         ],
-        "operationId": "Gadgets_create",
+        "operationId": "GadgetsInterface_create",
         "parameters": [],
         "responses": {
           "200": {
@@ -91,7 +94,7 @@
         "tags": [
           "Gadgets"
         ],
-        "operationId": "Gadgets_read",
+        "operationId": "GadgetsInterface_read",
         "parameters": [
           {
             "name": "id",
@@ -129,7 +132,7 @@
         "tags": [
           "Gadgets"
         ],
-        "operationId": "Gadgets_update",
+        "operationId": "GadgetsInterface_update",
         "parameters": [
           {
             "$ref": "#/components/parameters/Gadget.id"
@@ -171,7 +174,7 @@
         "tags": [
           "Gadgets"
         ],
-        "operationId": "Gadgets_delete",
+        "operationId": "GadgetsInterface_delete",
         "parameters": [
           {
             "name": "id",
@@ -204,7 +207,7 @@
         "tags": [
           "Gadgets"
         ],
-        "operationId": "Gadgets_analyze",
+        "operationId": "GadgetsInterface_analyze",
         "parameters": [
           {
             "name": "id",
@@ -244,7 +247,7 @@
         "tags": [
           "Widgets"
         ],
-        "operationId": "Widgets_list",
+        "operationId": "WidgetsInterface_list",
         "parameters": [],
         "responses": {
           "200": {
@@ -277,7 +280,7 @@
         "tags": [
           "Widgets"
         ],
-        "operationId": "Widgets_create",
+        "operationId": "WidgetsInterface_create",
         "parameters": [],
         "responses": {
           "200": {
@@ -317,7 +320,7 @@
         "tags": [
           "Widgets"
         ],
-        "operationId": "Widgets_read",
+        "operationId": "WidgetsInterface_read",
         "parameters": [
           {
             "name": "id",
@@ -355,7 +358,7 @@
         "tags": [
           "Widgets"
         ],
-        "operationId": "Widgets_update",
+        "operationId": "WidgetsInterface_update",
         "parameters": [
           {
             "$ref": "#/components/parameters/Widget.id"
@@ -397,7 +400,7 @@
         "tags": [
           "Widgets"
         ],
-        "operationId": "Widgets_delete",
+        "operationId": "WidgetsInterface_delete",
         "parameters": [
           {
             "name": "id",
@@ -430,7 +433,237 @@
         "tags": [
           "Widgets"
         ],
-        "operationId": "Widgets_analyze",
+        "operationId": "WidgetsInterface_analyze",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/wingdings": {
+      "get": {
+        "tags": [
+          "WingDing"
+        ],
+        "operationId": "WingDingInterface_list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WingDing"
+                  },
+                  "x-typespec-name": "WingDing[]"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/wingdings/{id}": {
+      "get": {
+        "tags": [
+          "WingDing"
+        ],
+        "operationId": "WingDingInterface_read",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WingDing"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "WingDing"
+        ],
+        "operationId": "WingDingInterface_create",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/WingDing.id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WingDing"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WingDingCreate"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "WingDing"
+        ],
+        "operationId": "WingDingInterface_update",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/WingDing.id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WingDing"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WingDingUpdate"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WingDing"
+        ],
+        "operationId": "WingDingInterface_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/wingdings/{id}/analyze": {
+      "post": {
+        "tags": [
+          "WingDing"
+        ],
+        "operationId": "WingDingInterface_analyze",
         "parameters": [
           {
             "name": "id",
@@ -483,6 +716,14 @@
         "schema": {
           "type": "string"
         }
+      },
+      "WingDing.id": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
       }
     },
     "schemas": {
@@ -508,7 +749,11 @@
           "id": {
             "type": "string"
           },
-          "weight": {
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "maxRPM": {
             "type": "integer",
             "format": "int32"
           },
@@ -523,14 +768,19 @@
         },
         "required": [
           "id",
-          "weight",
+          "createdOn",
+          "maxRPM",
           "color"
         ]
       },
       "GadgetCreate": {
         "type": "object",
         "properties": {
-          "weight": {
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "maxRPM": {
             "type": "integer",
             "format": "int32"
           },
@@ -544,14 +794,19 @@
           }
         },
         "required": [
-          "weight",
+          "createdOn",
+          "maxRPM",
           "color"
         ]
       },
       "GadgetUpdate": {
         "type": "object",
         "properties": {
-          "weight": {
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "maxRPM": {
             "type": "integer",
             "format": "int32"
           },
@@ -571,6 +826,10 @@
           "id": {
             "type": "string"
           },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
           "weight": {
             "type": "integer",
             "format": "int32"
@@ -586,6 +845,7 @@
         },
         "required": [
           "id",
+          "createdOn",
           "weight",
           "color"
         ]
@@ -593,6 +853,10 @@
       "WidgetCreate": {
         "type": "object",
         "properties": {
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
           "weight": {
             "type": "integer",
             "format": "int32"
@@ -607,6 +871,7 @@
           }
         },
         "required": [
+          "createdOn",
           "weight",
           "color"
         ]
@@ -614,6 +879,10 @@
       "WidgetUpdate": {
         "type": "object",
         "properties": {
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
           "weight": {
             "type": "integer",
             "format": "int32"
@@ -625,6 +894,97 @@
               "blue"
             ],
             "x-typespec-name": "red | blue"
+          }
+        }
+      },
+      "WingDing": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "height": {
+            "type": "number",
+            "format": "float"
+          },
+          "width": {
+            "type": "number",
+            "format": "float"
+          },
+          "color": {
+            "type": "string",
+            "enum": [
+              "orange",
+              "purple"
+            ],
+            "x-typespec-name": "orange | purple"
+          }
+        },
+        "required": [
+          "id",
+          "createdOn",
+          "height",
+          "width",
+          "color"
+        ]
+      },
+      "WingDingCreate": {
+        "type": "object",
+        "properties": {
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "height": {
+            "type": "number",
+            "format": "float"
+          },
+          "width": {
+            "type": "number",
+            "format": "float"
+          },
+          "color": {
+            "type": "string",
+            "enum": [
+              "orange",
+              "purple"
+            ],
+            "x-typespec-name": "orange | purple"
+          }
+        },
+        "required": [
+          "createdOn",
+          "height",
+          "width",
+          "color"
+        ]
+      },
+      "WingDingUpdate": {
+        "type": "object",
+        "properties": {
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "height": {
+            "type": "number",
+            "format": "float"
+          },
+          "width": {
+            "type": "number",
+            "format": "float"
+          },
+          "color": {
+            "type": "string",
+            "enum": [
+              "orange",
+              "purple"
+            ],
+            "x-typespec-name": "orange | purple"
           }
         }
       }
