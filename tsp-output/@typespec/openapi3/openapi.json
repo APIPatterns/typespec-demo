@@ -29,11 +29,26 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Gadget"
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Gadget"
+                      },
+                      "x-typespec-name": "Gadget[]",
+                      "description": "List of elements"
+                    },
+                    "nextLink": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "A link to the next page of results if present."
+                    }
                   },
-                  "x-typespec-name": "Gadget[]"
+                  "required": [
+                    "value"
+                  ],
+                  "x-typespec-name": "List<Gadget>"
                 }
               }
             }
@@ -54,53 +69,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Gadgets"
-        ],
-        "operationId": "GadgetsInterface_create",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Gadget"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": true,
-                "description": "A server-defined code that uniquely identifies the error.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GadgetCreate"
               }
             }
           }
@@ -155,14 +123,19 @@
           }
         }
       },
-      "patch": {
+      "put": {
         "tags": [
           "Gadgets"
         ],
-        "operationId": "GadgetsInterface_update",
+        "operationId": "GadgetsInterface_create",
         "parameters": [
           {
-            "$ref": "#/components/parameters/BaseThingymajig.id"
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -200,7 +173,90 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/GadgetUpdate"
+                "$ref": "#/components/schemas/GadgetCreateOrUpdate"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Gadgets"
+        ],
+        "operationId": "GadgetsInterface_update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Gadget"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/merge-patch+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "maxRPM": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "color": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "enum": [
+                          "Yellow"
+                        ]
+                      },
+                      {
+                        "type": "string",
+                        "enum": [
+                          "Green"
+                        ]
+                      }
+                    ],
+                    "x-typespec-name": "Color.Yellow | Color.Green"
+                  },
+                  "manufacturer": {
+                    "$ref": "#/components/schemas/ManufacturerUpdate"
+                  }
+                },
+                "x-typespec-name": "MergePatch<Gadget>"
               }
             }
           }
@@ -309,11 +365,26 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Widget"
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Widget"
+                      },
+                      "x-typespec-name": "Widget[]",
+                      "description": "List of elements"
+                    },
+                    "nextLink": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "A link to the next page of results if present."
+                    }
                   },
-                  "x-typespec-name": "Widget[]"
+                  "required": [
+                    "value"
+                  ],
+                  "x-typespec-name": "List<Widget>"
                 }
               }
             }
@@ -334,53 +405,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Widgets"
-        ],
-        "operationId": "WidgetsInterface_create",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Widget"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": true,
-                "description": "A server-defined code that uniquely identifies the error.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WidgetCreate"
               }
             }
           }
@@ -435,14 +459,19 @@
           }
         }
       },
-      "patch": {
+      "put": {
         "tags": [
           "Widgets"
         ],
-        "operationId": "WidgetsInterface_update",
+        "operationId": "WidgetsInterface_create",
         "parameters": [
           {
-            "$ref": "#/components/parameters/BaseThingymajig.id"
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -480,7 +509,76 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/WidgetUpdate"
+                "$ref": "#/components/schemas/WidgetCreateOrUpdate"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Widgets"
+        ],
+        "operationId": "WidgetsInterface_update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Widget"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/merge-patch+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "weight": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "color": {
+                    "$ref": "#/components/schemas/widgetColors"
+                  },
+                  "manufacturer": {
+                    "$ref": "#/components/schemas/ManufacturerUpdate"
+                  }
+                },
+                "x-typespec-name": "MergePatch<Widget>"
               }
             }
           }
@@ -589,11 +687,26 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WingDing"
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/WingDing"
+                      },
+                      "x-typespec-name": "WingDing[]",
+                      "description": "List of elements"
+                    },
+                    "nextLink": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "A link to the next page of results if present."
+                    }
                   },
-                  "x-typespec-name": "WingDing[]"
+                  "required": [
+                    "value"
+                  ],
+                  "x-typespec-name": "List<WingDing>"
                 }
               }
             }
@@ -614,53 +727,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "WingDing"
-        ],
-        "operationId": "WingDingInterface_create",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WingDing"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": true,
-                "description": "A server-defined code that uniquely identifies the error.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WingDingCreate"
               }
             }
           }
@@ -715,14 +781,19 @@
           }
         }
       },
-      "patch": {
+      "put": {
         "tags": [
           "WingDing"
         ],
-        "operationId": "WingDingInterface_update",
+        "operationId": "WingDingInterface_create",
         "parameters": [
           {
-            "$ref": "#/components/parameters/BaseThingymajig.id"
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -760,7 +831,80 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/WingDingUpdate"
+                "$ref": "#/components/schemas/WingDingCreateOrUpdate"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "WingDing"
+        ],
+        "operationId": "WingDingInterface_update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WingDing"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/merge-patch+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "height": {
+                    "type": "number",
+                    "format": "float"
+                  },
+                  "width": {
+                    "type": "number",
+                    "format": "float"
+                  },
+                  "color": {
+                    "$ref": "#/components/schemas/Color"
+                  },
+                  "manufacturer": {
+                    "$ref": "#/components/schemas/ManufacturerUpdate"
+                  }
+                },
+                "x-typespec-name": "MergePatch<WingDing>"
               }
             }
           }
@@ -809,17 +953,19 @@
     }
   },
   "components": {
-    "parameters": {
-      "BaseThingymajig.id": {
-        "name": "id",
-        "in": "path",
-        "required": true,
-        "schema": {
-          "type": "string"
-        }
-      }
-    },
     "schemas": {
+      "ApiVersion": {
+        "type": "object",
+        "properties": {
+          "apiVersion": {
+            "type": "string",
+            "description": "The version of the API in the form YYYY-MM-DD"
+          }
+        },
+        "required": [
+          "apiVersion"
+        ]
+      },
       "BaseThingymajig": {
         "type": "object",
         "properties": {
@@ -852,7 +998,7 @@
           "updatedOn"
         ]
       },
-      "BaseThingymajigCreate": {
+      "BaseThingymajigCreateOrUpdate": {
         "type": "object",
         "properties": {
           "color": {
@@ -865,17 +1011,6 @@
         "required": [
           "manufacturer"
         ]
-      },
-      "BaseThingymajigUpdate": {
-        "type": "object",
-        "properties": {
-          "color": {
-            "$ref": "#/components/schemas/Color"
-          },
-          "manufacturer": {
-            "$ref": "#/components/schemas/ManufacturerUpdate"
-          }
-        }
       },
       "Color": {
         "type": "string",
@@ -965,7 +1100,7 @@
           }
         ]
       },
-      "GadgetCreate": {
+      "GadgetCreateOrUpdate": {
         "type": "object",
         "properties": {
           "maxRPM": {
@@ -995,38 +1130,7 @@
         ],
         "allOf": [
           {
-            "$ref": "#/components/schemas/BaseThingymajigCreate"
-          }
-        ]
-      },
-      "GadgetUpdate": {
-        "type": "object",
-        "properties": {
-          "maxRPM": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "color": {
-            "anyOf": [
-              {
-                "type": "string",
-                "enum": [
-                  "Yellow"
-                ]
-              },
-              {
-                "type": "string",
-                "enum": [
-                  "Green"
-                ]
-              }
-            ],
-            "x-typespec-name": "Color.Yellow | Color.Green"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseThingymajigUpdate"
+            "$ref": "#/components/schemas/BaseThingymajigCreateOrUpdate"
           }
         ]
       },
@@ -1098,7 +1202,7 @@
           }
         ]
       },
-      "WidgetCreate": {
+      "WidgetCreateOrUpdate": {
         "type": "object",
         "properties": {
           "weight": {
@@ -1114,24 +1218,7 @@
         ],
         "allOf": [
           {
-            "$ref": "#/components/schemas/BaseThingymajigCreate"
-          }
-        ]
-      },
-      "WidgetUpdate": {
-        "type": "object",
-        "properties": {
-          "weight": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "color": {
-            "$ref": "#/components/schemas/widgetColors"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseThingymajigUpdate"
+            "$ref": "#/components/schemas/BaseThingymajigCreateOrUpdate"
           }
         ]
       },
@@ -1160,7 +1247,7 @@
           }
         ]
       },
-      "WingDingCreate": {
+      "WingDingCreateOrUpdate": {
         "type": "object",
         "properties": {
           "height": {
@@ -1181,28 +1268,7 @@
         ],
         "allOf": [
           {
-            "$ref": "#/components/schemas/BaseThingymajigCreate"
-          }
-        ]
-      },
-      "WingDingUpdate": {
-        "type": "object",
-        "properties": {
-          "height": {
-            "type": "number",
-            "format": "float"
-          },
-          "width": {
-            "type": "number",
-            "format": "float"
-          },
-          "color": {
-            "$ref": "#/components/schemas/Color"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseThingymajigUpdate"
+            "$ref": "#/components/schemas/BaseThingymajigCreateOrUpdate"
           }
         ]
       },
