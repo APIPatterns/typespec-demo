@@ -15,10 +15,6 @@ namespace DemoService;
 // Models
 
 // Added an enumeration for color.
-/*
-We will often see slight "typos" in an API spec, e.g.
-yellow vs. Yellow
-*/
 enum Color {
   Red,
   Yellow,
@@ -34,7 +30,6 @@ model Manufacturer {
 }
 
 // Defined a common metadata model.
-// Notice the visibility read -- this is what affects the "Request Body Model" and the "Response Body Model".
 @doc("Common metadata for resources")
 model ResourceMetadata {
   @doc("Date and time that the resource was created")
@@ -46,7 +41,6 @@ model ResourceMetadata {
 }
 
 // Added a base model for common fields.
-// Notice the spread operator
 model BaseThingymajig {
   @visibility("read", "update")
   @path
@@ -74,14 +68,6 @@ model WingDing extends BaseThingymajig {
   color?: Color;
 }
 
-/*
-Often, we will see teams use slight different error models.
-Sometimes, it's different fields, other times, it's an entirely different structure. 
-
-Consistentcy is really important for developer experience. 
-If each team does something slightly differently, then every downstream consumer has to do something slightly differently.
-*/
-
 // Common Error Model
 @error
 @doc("Error response")
@@ -107,40 +93,33 @@ model ErrorDetail {
 
 // Operations
 
-// Adopted naming convention for interfaces, e.g. WidgetsInterface, GadgetsInterface, WingDingInterface
+//Common Interface
+interface ResourceInterface<T> {
+  @get list(): T[] | Error;
+  @get read(@path id: string): T | Error;
+  @post create(...T): T | Error;
+  @patch update(...T): T | Error;
+  @delete delete(@path id: string): void | Error;
+}
+
+
 @route("/widgets")
 @tag("Widgets")
-interface WidgetsInterface {
-  @get list(): Widget[] | Error;
-  @get read(@path id: string): Widget | Error;
-  @post create(...Widget): Widget | Error;
-  @patch update(...Widget): Widget | Error;
-  @delete delete(@path id: string): void | Error;
+interface WidgetsInterface extends ResourceInterface<Widget>{
   @route("{id}/analyze") @post analyze(@path id: string): string | Error;
 }
 
 @route("/gadgets")
 @tag("Gadgets")
-interface GadgetsInterface {
-  @get list(): Gadget[] | Error;
-  @get read(@path id: string): Gadget | Error;
-  @post create(...Gadget): Gadget | Error;
-  @patch update(...Gadget): Gadget | Error;
-  @delete delete(@path id: string): void | Error;
+interface GadgetsInterface extends ResourceInterface<Gadget>{
   @route("{id}/analyze") @post analyze(@path id: string): string | Error;
 }
 
 /* 
 Added a new interface for WingDings.
 Who said cut/paste/replace was tedious and error prone? 
+Wingding DO NOT have an analyze operation!!!
 */
 @route("/wingdings")
 @tag("WingDing")
-interface WingDingInterface {
-  @get list(): WingDing[] | Error;
-  @get read(@path id: string): WingDing | Error;
-  @post create(...WingDing): WingDing | Error;
-  @patch update(...WingDing): WingDing | Error;
-  @delete delete(@path id: string): void | Error;
-  @route("{id}/analyze") @post analyze(@path id: string): string | Error;
-}
+interface WingDingInterface extends ResourceInterface<WingDing>{};
