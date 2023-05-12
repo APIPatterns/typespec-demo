@@ -40,6 +40,15 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -69,6 +78,15 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -118,6 +136,15 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -135,7 +162,7 @@
         "operationId": "GadgetsInterface_update",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Gadget.id"
+            "$ref": "#/components/parameters/BaseThingymajig.id"
           }
         ],
         "responses": {
@@ -151,6 +178,15 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -191,6 +227,15 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -231,6 +276,15 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -266,6 +320,15 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -295,6 +358,15 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -344,6 +416,15 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -361,7 +442,7 @@
         "operationId": "WidgetsInterface_update",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Widget.id"
+            "$ref": "#/components/parameters/BaseThingymajig.id"
           }
         ],
         "responses": {
@@ -377,6 +458,15 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -417,6 +507,15 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -457,6 +556,15 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -492,11 +600,67 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "WingDing"
+        ],
+        "operationId": "WingDingInterface_create",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WingDing"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WingDingCreate"
               }
             }
           }
@@ -532,53 +696,20 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "WingDing"
-        ],
-        "operationId": "WingDingInterface_create",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/WingDing.id"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WingDing"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WingDingCreate"
               }
             }
           }
@@ -591,7 +722,7 @@
         "operationId": "WingDingInterface_update",
         "parameters": [
           {
-            "$ref": "#/components/parameters/WingDing.id"
+            "$ref": "#/components/parameters/BaseThingymajig.id"
           }
         ],
         "responses": {
@@ -607,6 +738,15 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -647,6 +787,15 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -687,6 +836,15 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -701,23 +859,7 @@
   },
   "components": {
     "parameters": {
-      "Gadget.id": {
-        "name": "id",
-        "in": "path",
-        "required": true,
-        "schema": {
-          "type": "string"
-        }
-      },
-      "Widget.id": {
-        "name": "id",
-        "in": "path",
-        "required": true,
-        "schema": {
-          "type": "string"
-        }
-      },
-      "WingDing.id": {
+      "BaseThingymajig.id": {
         "name": "id",
         "in": "path",
         "required": true,
@@ -727,17 +869,112 @@
       }
     },
     "schemas": {
+      "BaseThingymajig": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "color": {
+            "$ref": "#/components/schemas/Color"
+          },
+          "manufacturer": {
+            "$ref": "#/components/schemas/Manufacturer"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time that the resource was created",
+            "readOnly": true
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time that the resource was last updated",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "id",
+          "manufacturer",
+          "createdOn",
+          "updatedOn"
+        ]
+      },
+      "BaseThingymajigCreate": {
+        "type": "object",
+        "properties": {
+          "color": {
+            "$ref": "#/components/schemas/Color"
+          },
+          "manufacturer": {
+            "$ref": "#/components/schemas/Manufacturer"
+          }
+        },
+        "required": [
+          "manufacturer"
+        ]
+      },
+      "BaseThingymajigUpdate": {
+        "type": "object",
+        "properties": {
+          "color": {
+            "$ref": "#/components/schemas/Color"
+          },
+          "manufacturer": {
+            "$ref": "#/components/schemas/ManufacturerUpdate"
+          }
+        }
+      },
+      "Color": {
+        "type": "string",
+        "enum": [
+          "Red",
+          "Yellow",
+          "Purple",
+          "Green",
+          "Orange",
+          "Blue"
+        ]
+      },
       "Error": {
         "type": "object",
         "properties": {
-          "code": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string"
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ErrorDetail"
+              }
+            ],
+            "description": "Top-level error object"
           }
         },
+        "description": "Error response",
+        "required": [
+          "error"
+        ]
+      },
+      "ErrorDetail": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "A server-defined code that uniquely identifies the error."
+          },
+          "message": {
+            "type": "string",
+            "description": "A human-readable representation of the error."
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            },
+            "x-typespec-name": "ErrorDetail[]",
+            "description": "An array of details about specific errors that led to this reported error."
+          }
+        },
+        "description": "Error details",
         "required": [
           "code",
           "message"
@@ -746,167 +983,210 @@
       "Gadget": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string"
-          },
-          "createdOn": {
-            "type": "string",
-            "format": "date-time"
-          },
           "maxRPM": {
             "type": "integer",
             "format": "int32"
           },
           "color": {
-            "type": "string",
-            "enum": [
-              "yellow",
-              "green"
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "Yellow"
+                ]
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "Green"
+                ]
+              }
             ],
-            "x-typespec-name": "yellow | green"
+            "x-typespec-name": "Color.Yellow | Color.Green"
           }
         },
         "required": [
-          "id",
-          "createdOn",
-          "maxRPM",
-          "color"
+          "maxRPM"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseThingymajig"
+          }
         ]
       },
       "GadgetCreate": {
         "type": "object",
         "properties": {
-          "createdOn": {
-            "type": "string",
-            "format": "date-time"
-          },
           "maxRPM": {
             "type": "integer",
             "format": "int32"
           },
           "color": {
-            "type": "string",
-            "enum": [
-              "yellow",
-              "green"
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "Yellow"
+                ]
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "Green"
+                ]
+              }
             ],
-            "x-typespec-name": "yellow | green"
+            "x-typespec-name": "Color.Yellow | Color.Green"
           }
         },
         "required": [
-          "createdOn",
-          "maxRPM",
-          "color"
+          "maxRPM"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseThingymajigCreate"
+          }
         ]
       },
       "GadgetUpdate": {
         "type": "object",
         "properties": {
-          "createdOn": {
-            "type": "string",
-            "format": "date-time"
-          },
           "maxRPM": {
             "type": "integer",
             "format": "int32"
           },
           "color": {
-            "type": "string",
-            "enum": [
-              "yellow",
-              "green"
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "Yellow"
+                ]
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "Green"
+                ]
+              }
             ],
-            "x-typespec-name": "yellow | green"
+            "x-typespec-name": "Color.Yellow | Color.Green"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseThingymajigUpdate"
+          }
+        ]
+      },
+      "Manufacturer": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "address"
+        ]
+      },
+      "ManufacturerUpdate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
           }
         }
+      },
+      "ResourceMetadata": {
+        "type": "object",
+        "properties": {
+          "createdOn": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time that the resource was created",
+            "readOnly": true
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time that the resource was last updated",
+            "readOnly": true
+          }
+        },
+        "description": "Common metadata for resources",
+        "required": [
+          "createdOn",
+          "updatedOn"
+        ]
       },
       "Widget": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string"
-          },
-          "createdOn": {
-            "type": "string",
-            "format": "date-time"
-          },
           "weight": {
             "type": "integer",
             "format": "int32"
           },
           "color": {
-            "type": "string",
-            "enum": [
-              "red",
-              "blue"
-            ],
-            "x-typespec-name": "red | blue"
+            "$ref": "#/components/schemas/widgetColors"
           }
         },
         "required": [
-          "id",
-          "createdOn",
-          "weight",
-          "color"
+          "weight"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseThingymajig"
+          }
         ]
       },
       "WidgetCreate": {
         "type": "object",
         "properties": {
-          "createdOn": {
-            "type": "string",
-            "format": "date-time"
-          },
           "weight": {
             "type": "integer",
             "format": "int32"
           },
           "color": {
-            "type": "string",
-            "enum": [
-              "red",
-              "blue"
-            ],
-            "x-typespec-name": "red | blue"
+            "$ref": "#/components/schemas/widgetColors"
           }
         },
         "required": [
-          "createdOn",
-          "weight",
-          "color"
+          "weight"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseThingymajigCreate"
+          }
         ]
       },
       "WidgetUpdate": {
         "type": "object",
         "properties": {
-          "createdOn": {
-            "type": "string",
-            "format": "date-time"
-          },
           "weight": {
             "type": "integer",
             "format": "int32"
           },
           "color": {
-            "type": "string",
-            "enum": [
-              "red",
-              "blue"
-            ],
-            "x-typespec-name": "red | blue"
+            "$ref": "#/components/schemas/widgetColors"
           }
-        }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseThingymajigUpdate"
+          }
+        ]
       },
       "WingDing": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string"
-          },
-          "createdOn": {
-            "type": "string",
-            "format": "date-time"
-          },
           "height": {
             "type": "number",
             "format": "float"
@@ -916,29 +1196,22 @@
             "format": "float"
           },
           "color": {
-            "type": "string",
-            "enum": [
-              "orange",
-              "purple"
-            ],
-            "x-typespec-name": "orange | purple"
+            "$ref": "#/components/schemas/Color"
           }
         },
         "required": [
-          "id",
-          "createdOn",
           "height",
-          "width",
-          "color"
+          "width"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseThingymajig"
+          }
         ]
       },
       "WingDingCreate": {
         "type": "object",
         "properties": {
-          "createdOn": {
-            "type": "string",
-            "format": "date-time"
-          },
           "height": {
             "type": "number",
             "format": "float"
@@ -948,28 +1221,22 @@
             "format": "float"
           },
           "color": {
-            "type": "string",
-            "enum": [
-              "orange",
-              "purple"
-            ],
-            "x-typespec-name": "orange | purple"
+            "$ref": "#/components/schemas/Color"
           }
         },
         "required": [
-          "createdOn",
           "height",
-          "width",
-          "color"
+          "width"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseThingymajigCreate"
+          }
         ]
       },
       "WingDingUpdate": {
         "type": "object",
         "properties": {
-          "createdOn": {
-            "type": "string",
-            "format": "date-time"
-          },
           "height": {
             "type": "number",
             "format": "float"
@@ -979,14 +1246,30 @@
             "format": "float"
           },
           "color": {
+            "$ref": "#/components/schemas/Color"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseThingymajigUpdate"
+          }
+        ]
+      },
+      "widgetColors": {
+        "oneOf": [
+          {
             "type": "string",
             "enum": [
-              "orange",
-              "purple"
-            ],
-            "x-typespec-name": "orange | purple"
+              "Red"
+            ]
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Blue"
+            ]
           }
-        }
+        ]
       }
     }
   }

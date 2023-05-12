@@ -1,6 +1,8 @@
 import "@typespec/http";
+import "@typespec/openapi3";
 
 using TypeSpec.Http;
+using OpenAPI;
 
 // Service definition
 @service({
@@ -10,48 +12,97 @@ using TypeSpec.Http;
 namespace DemoService;
 
 
-/*
-Added tsp-output to .gitignore. This treats the output of emitters as generated artifacts
-and emphasizes that they should not be hand-edited.
-*/
-
 // Models
 
-// Added a new property to all the models, createdOn. 
+// Added an enumeration for color.
+/*
+We will often see slight "typos" in an API spec, e.g.
+yellow vs. Yellow
+*/
+enum Color {
+  Red,
+  Yellow,
+  Purple,
+  Green,
+  Orange,
+  Blue,
+}
 
-model Widget {
+model Manufacturer {
+  name: string;
+  address: string;
+}
+
+// Defined a common metadata model.
+// Notice the visibility read -- this is what affects the "Request Body Model" and the "Response Body Model".
+@doc("Common metadata for resources")
+model ResourceMetadata {
+  @doc("Date and time that the resource was created")
+  @visibility("read")
+  createdOn: utcDateTime;
+  @doc("Date and time that the resource was last updated")
+  @visibility("read")
+  updatedOn: utcDateTime;
+}
+
+// Added a base model for common fields.
+// Notice the spread operator
+model BaseThingymajig {
   @visibility("read", "update")
   @path
   id: string;
-  createdOn: utcDateTime;
+  color?: Color;
+  manufacturer: Manufacturer;
+  ...ResourceMetadata;
+}
+
+@oneOf
+union widgetColors{Red:Color.Red, Blue: Color.Blue};
+model Widget extends BaseThingymajig {
   weight: int32;
-  color: "red" | "blue";
+  color?: widgetColors;
 }
 
-// Added a maxRPM field to the Gadget model
-model Gadget {
-  @visibility("read", "update")
-  @path
-  id: string;
-  createdOn: utcDateTime;
+model Gadget extends BaseThingymajig {
   maxRPM: int32;
-  color: "yellow" | "green";
+  color?: Color.Yellow | Color.Green;
 }
 
-// Added a new model for WingDings
-model WingDing {
-  @path id: string;
-  createdOn: utcDateTime;
+model WingDing extends BaseThingymajig {
   height: float32;
   width: float32;
-  color: "orange" | "purple";
+  color?: Color;
 }
 
+/*
+Often, we will see teams use slight different error models.
+Sometimes, it's different fields, other times, it's an entirely different structure. 
+
+Consistentcy is really important for developer experience. 
+If each team does something slightly differently, then every downstream consumer has to do something slightly differently.
+*/
+
+// Common Error Model
 @error
+@doc("Error response")
 model Error {
-  code: int32;
-  message: string;
+    @doc("A server-defined code that uniquely identifies the error.")
+    @header("x-ms-error-code")
+    code: string;
+    @doc("Top-level error object")
+    error: ErrorDetail;
 }
+
+@doc("Error details")
+model ErrorDetail {
+  @doc("A server-defined code that uniquely identifies the error.")
+  code: string;
+  @doc("A human-readable representation of the error.")
+  message: string;
+  @doc("An array of details about specific errors that led to this reported error.")
+  details?: ErrorDetail[];
+}
+
 
 
 // Operations
