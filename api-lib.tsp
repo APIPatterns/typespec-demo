@@ -53,22 +53,22 @@ model ApiVersion {
     @doc("A link to the next page of results if present.")
     nextLink?: url;
   }
-  @get op list<T, P = {}>(...P): List<T> | Error;
+  @get op list<T, P = {}>(...P, ...ApiVersion): List<T> | Error;
   
-  @get op read<T, P = {}>(...P, @path id: string): T | Error;
+  @get op read<T, P = {}>(...P, @path id: string, ...ApiVersion): T | Error;
   
-  @put op create<T, P = {}>(...P, @path id: string, @body body: T): T | Error;
+  @put op create<T, P = {}>(...P, @path id: string, ...ApiVersion, @body body: T): T | Error;
   
   
   model MergePatch<T> {
     @header contentType: "application/merge-patch+json";
     ...T;
   }
-  @patch op update<T, P = {}>(...P, @path id: string, @body body: MergePatch<T>): T | Error;
+  @patch op update<T, P = {}>(...P, @path id: string, ...ApiVersion, @body body: MergePatch<T>): T | Error;
   
-  @delete op delete<P = {}>(...P, @path id: string): void | Error;
+  @delete op delete<P = {}>(...P, @path id: string, ...ApiVersion): void | Error;
   
-  @post op postAction<T, P = {}>(...P): T | Error;
+  @post op postAction<T, P = {}>(...P, ...ApiVersion): T | Error;
   
   
   //Common Interface using the operations defined above.

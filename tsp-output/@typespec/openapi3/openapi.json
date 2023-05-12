@@ -22,7 +22,11 @@
           "Gadgets"
         ],
         "operationId": "GadgetsInterface_getGadgets",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -136,6 +140,9 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
           }
         ],
         "responses": {
@@ -183,6 +190,9 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
           }
         ],
         "responses": {
@@ -266,6 +276,9 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
           }
         ],
         "responses": {
@@ -300,7 +313,11 @@
           "Widgets"
         ],
         "operationId": "WidgetsInterface_list",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -367,6 +384,9 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
           }
         ],
         "responses": {
@@ -414,6 +434,9 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
           }
         ],
         "responses": {
@@ -470,6 +493,9 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
           }
         ],
         "responses": {
@@ -539,6 +565,9 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
           }
         ],
         "responses": {
@@ -622,7 +651,11 @@
           "WingDing"
         ],
         "operationId": "WingDingInterface_getWingDings",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -689,6 +722,9 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
           }
         ],
         "responses": {
@@ -736,6 +772,9 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
           }
         ],
         "responses": {
@@ -766,6 +805,17 @@
     }
   },
   "components": {
+    "parameters": {
+      "APILibrary.ApiVersion": {
+        "name": "api-version",
+        "in": "query",
+        "required": true,
+        "description": "The version of the API in the form YYYY-MM-DD",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
     "schemas": {
       "APILibrary.Color": {
         "type": "string",
