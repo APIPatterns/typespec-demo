@@ -19,57 +19,67 @@
           "Gadgets"
         ],
         "operationId": "Gadgets_list",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/ApiVersion"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "value": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Gadget"
-                      },
-                      "x-typespec-name": "Gadget[]",
-                      "description": "List of elements"
-                    },
-                    "nextLink": {
-                      "type": "string",
-                      "format": "uri",
-                      "description": "A link to the next page of results if present."
-                    }
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Gadget"
                   },
-                  "required": [
-                    "value"
-                  ],
-                  "x-typespec-name": "List<Gadget>"
+                  "x-typespec-name": "Gadget[]"
                 }
               }
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": true,
-                "description": "A server-defined code that uniquely identifies the error.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Gadgets"
+        ],
+        "operationId": "Gadgets_create",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Gadget"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GadgetCreate"
               }
             }
           }
@@ -90,9 +100,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "$ref": "#/components/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -108,79 +115,11 @@
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": true,
-                "description": "A server-defined code that uniquely identifies the error.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Gadgets"
-        ],
-        "operationId": "Gadgets_create",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/ApiVersion"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Gadget"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": true,
-                "description": "A server-defined code that uniquely identifies the error.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GadgetCreateOrUpdate"
               }
             }
           }
@@ -192,9 +131,6 @@
         ],
         "operationId": "Gadgets_update",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/ApiVersion"
-          },
           {
             "$ref": "#/components/parameters/Gadget.id"
           }
@@ -212,15 +148,6 @@
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": true,
-                "description": "A server-defined code that uniquely identifies the error.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -232,28 +159,9 @@
         },
         "requestBody": {
           "content": {
-            "application/merge-patch+json": {
+            "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "height": {
-                    "type": "number",
-                    "format": "float"
-                  },
-                  "width": {
-                    "type": "number",
-                    "format": "float"
-                  },
-                  "color": {
-                    "type": "string",
-                    "enum": [
-                      "green",
-                      "yellow"
-                    ],
-                    "x-typespec-name": "green | yellow"
-                  }
-                },
-                "x-typespec-name": "Patch<Gadget>"
+                "$ref": "#/components/schemas/GadgetUpdate"
               }
             }
           }
@@ -272,9 +180,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "$ref": "#/components/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -283,15 +188,46 @@
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": true,
-                "description": "A server-defined code that uniquely identifies the error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gadgets/{id}/analyze": {
+      "post": {
+        "tags": [
+          "Gadgets"
+        ],
+        "operationId": "Gadgets_analyze",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
                 "schema": {
                   "type": "string"
                 }
               }
-            },
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
             "content": {
               "application/json": {
                 "schema": {
@@ -309,52 +245,24 @@
           "Widgets"
         ],
         "operationId": "Widgets_list",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/ApiVersion"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "value": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Widget"
-                      },
-                      "x-typespec-name": "Widget[]",
-                      "description": "List of elements"
-                    },
-                    "nextLink": {
-                      "type": "string",
-                      "format": "uri",
-                      "description": "A link to the next page of results if present."
-                    }
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Widget"
                   },
-                  "required": [
-                    "value"
-                  ],
-                  "x-typespec-name": "List<Widget>"
+                  "x-typespec-name": "Widget[]"
                 }
               }
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": true,
-                "description": "A server-defined code that uniquely identifies the error.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -364,46 +272,40 @@
             }
           }
         }
-      }
-    },
-    "/widgets/analyze": {
+      },
       "post": {
         "tags": [
           "Widgets"
         ],
-        "operationId": "Widgets_analyze",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/ApiVersion"
-          }
-        ],
+        "operationId": "Widgets_create",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/Widget"
                 }
               }
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": true,
-                "description": "A server-defined code that uniquely identifies the error.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WidgetCreate"
               }
             }
           }
@@ -424,9 +326,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "$ref": "#/components/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -442,79 +341,11 @@
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": true,
-                "description": "A server-defined code that uniquely identifies the error.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Widgets"
-        ],
-        "operationId": "Widgets_create",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/ApiVersion"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Widget"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": true,
-                "description": "A server-defined code that uniquely identifies the error.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WidgetCreateOrUpdate"
               }
             }
           }
@@ -526,9 +357,6 @@
         ],
         "operationId": "Widgets_update",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/ApiVersion"
-          },
           {
             "$ref": "#/components/parameters/Widget.id"
           }
@@ -546,15 +374,6 @@
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": true,
-                "description": "A server-defined code that uniquely identifies the error.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -566,24 +385,9 @@
         },
         "requestBody": {
           "content": {
-            "application/merge-patch+json": {
+            "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "weight": {
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "color": {
-                    "type": "string",
-                    "enum": [
-                      "red",
-                      "blue"
-                    ],
-                    "x-typespec-name": "red | blue"
-                  }
-                },
-                "x-typespec-name": "Patch<Widget>"
+                "$ref": "#/components/schemas/WidgetUpdate"
               }
             }
           }
@@ -602,9 +406,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "$ref": "#/components/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -613,15 +414,46 @@
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": true,
-                "description": "A server-defined code that uniquely identifies the error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/widgets/{id}/analyze": {
+      "post": {
+        "tags": [
+          "Widgets"
+        ],
+        "operationId": "Widgets_analyze",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
                 "schema": {
                   "type": "string"
                 }
               }
-            },
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
             "content": {
               "application/json": {
                 "schema": {
@@ -636,15 +468,6 @@
   },
   "components": {
     "parameters": {
-      "ApiVersion": {
-        "name": "api-version",
-        "in": "query",
-        "required": true,
-        "description": "The version of the API in the form YYYY-MM-DD",
-        "schema": {
-          "type": "string"
-        }
-      },
       "Gadget.id": {
         "name": "id",
         "in": "path",
@@ -666,41 +489,14 @@
       "Error": {
         "type": "object",
         "properties": {
-          "error": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ErrorDetail"
-              }
-            ],
-            "description": "Top-level error object"
-          }
-        },
-        "description": "Error response",
-        "required": [
-          "error"
-        ]
-      },
-      "ErrorDetail": {
-        "type": "object",
-        "properties": {
           "code": {
-            "type": "string",
-            "description": "A server-defined code that uniquely identifies the error."
+            "type": "integer",
+            "format": "int32"
           },
           "message": {
-            "type": "string",
-            "description": "A human-readable representation of the error."
-          },
-          "details": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ErrorDetail"
-            },
-            "x-typespec-name": "ErrorDetail[]",
-            "description": "An array of details about specific errors that led to this reported error."
+            "type": "string"
           }
         },
-        "description": "Error details",
         "required": [
           "code",
           "message"
@@ -712,55 +508,62 @@
           "id": {
             "type": "string"
           },
-          "height": {
-            "type": "number",
-            "format": "float"
-          },
-          "width": {
-            "type": "number",
-            "format": "float"
+          "weight": {
+            "type": "integer",
+            "format": "int32"
           },
           "color": {
             "type": "string",
             "enum": [
-              "green",
-              "yellow"
+              "yellow",
+              "green"
             ],
-            "x-typespec-name": "green | yellow"
+            "x-typespec-name": "yellow | green"
           }
         },
         "required": [
           "id",
-          "height",
-          "width",
+          "weight",
           "color"
         ]
       },
-      "GadgetCreateOrUpdate": {
+      "GadgetCreate": {
         "type": "object",
         "properties": {
-          "height": {
-            "type": "number",
-            "format": "float"
-          },
-          "width": {
-            "type": "number",
-            "format": "float"
+          "weight": {
+            "type": "integer",
+            "format": "int32"
           },
           "color": {
             "type": "string",
             "enum": [
-              "green",
-              "yellow"
+              "yellow",
+              "green"
             ],
-            "x-typespec-name": "green | yellow"
+            "x-typespec-name": "yellow | green"
           }
         },
         "required": [
-          "height",
-          "width",
+          "weight",
           "color"
         ]
+      },
+      "GadgetUpdate": {
+        "type": "object",
+        "properties": {
+          "weight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "color": {
+            "type": "string",
+            "enum": [
+              "yellow",
+              "green"
+            ],
+            "x-typespec-name": "yellow | green"
+          }
+        }
       },
       "Widget": {
         "type": "object",
@@ -787,7 +590,7 @@
           "color"
         ]
       },
-      "WidgetCreateOrUpdate": {
+      "WidgetCreate": {
         "type": "object",
         "properties": {
           "weight": {
@@ -807,6 +610,23 @@
           "weight",
           "color"
         ]
+      },
+      "WidgetUpdate": {
+        "type": "object",
+        "properties": {
+          "weight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "color": {
+            "type": "string",
+            "enum": [
+              "red",
+              "blue"
+            ],
+            "x-typespec-name": "red | blue"
+          }
+        }
       }
     }
   }
