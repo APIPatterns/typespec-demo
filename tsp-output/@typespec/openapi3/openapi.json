@@ -48,7 +48,7 @@
                   "required": [
                     "value"
                   ],
-                  "x-typespec-name": "List<Gadget>"
+                  "x-typespec-name": "APILibrary.List<Gadget>"
                 }
               }
             }
@@ -67,7 +67,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/APILibrary.Error"
                 }
               }
             }
@@ -105,7 +105,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/APILibrary.Error"
                 }
               }
             }
@@ -163,7 +163,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/APILibrary.Error"
                 }
               }
             }
@@ -210,7 +210,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/APILibrary.Error"
                 }
               }
             }
@@ -241,13 +241,13 @@
                         ]
                       }
                     ],
-                    "x-typespec-name": "Color.Yellow | Color.Green"
+                    "x-typespec-name": "APILibrary.Color.Yellow | APILibrary.Color.Green"
                   },
                   "manufacturer": {
                     "$ref": "#/components/schemas/ManufacturerUpdate"
                   }
                 },
-                "x-typespec-name": "MergePatch<Gadget>"
+                "x-typespec-name": "APILibrary.MergePatch<Gadget>"
               }
             }
           }
@@ -286,7 +286,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/APILibrary.Error"
                 }
               }
             }
@@ -326,7 +326,7 @@
                   "required": [
                     "value"
                   ],
-                  "x-typespec-name": "List<Widget>"
+                  "x-typespec-name": "APILibrary.List<Widget>"
                 }
               }
             }
@@ -345,7 +345,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/APILibrary.Error"
                 }
               }
             }
@@ -394,7 +394,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/APILibrary.Error"
                 }
               }
             }
@@ -441,7 +441,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/APILibrary.Error"
                 }
               }
             }
@@ -497,7 +497,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/APILibrary.Error"
                 }
               }
             }
@@ -520,7 +520,7 @@
                     "$ref": "#/components/schemas/ManufacturerUpdate"
                   }
                 },
-                "x-typespec-name": "MergePatch<Widget>"
+                "x-typespec-name": "APILibrary.MergePatch<Widget>"
               }
             }
           }
@@ -559,7 +559,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/APILibrary.Error"
                 }
               }
             }
@@ -608,7 +608,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/APILibrary.Error"
                 }
               }
             }
@@ -648,7 +648,7 @@
                   "required": [
                     "value"
                   ],
-                  "x-typespec-name": "List<WingDing>"
+                  "x-typespec-name": "APILibrary.List<WingDing>"
                 }
               }
             }
@@ -667,7 +667,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/APILibrary.Error"
                 }
               }
             }
@@ -716,7 +716,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/APILibrary.Error"
                 }
               }
             }
@@ -756,7 +756,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/APILibrary.Error"
                 }
               }
             }
@@ -767,16 +767,58 @@
   },
   "components": {
     "schemas": {
-      "ApiVersion": {
+      "APILibrary.Color": {
+        "type": "string",
+        "enum": [
+          "Red",
+          "Yellow",
+          "Purple",
+          "Green",
+          "Orange",
+          "Blue"
+        ]
+      },
+      "APILibrary.Error": {
         "type": "object",
         "properties": {
-          "apiVersion": {
-            "type": "string",
-            "description": "The version of the API in the form YYYY-MM-DD"
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/APILibrary.ErrorDetail"
+              }
+            ],
+            "description": "Top-level error object"
           }
         },
+        "description": "Error response",
         "required": [
-          "apiVersion"
+          "error"
+        ]
+      },
+      "APILibrary.ErrorDetail": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "A server-defined code that uniquely identifies the error."
+          },
+          "message": {
+            "type": "string",
+            "description": "A human-readable representation of the error."
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/APILibrary.ErrorDetail"
+            },
+            "x-typespec-name": "APILibrary.ErrorDetail[]",
+            "description": "An array of details about specific errors that led to this reported error."
+          }
+        },
+        "description": "Error details",
+        "required": [
+          "code",
+          "message"
         ]
       },
       "BaseThingymajig": {
@@ -786,7 +828,7 @@
             "type": "string"
           },
           "color": {
-            "$ref": "#/components/schemas/Color"
+            "$ref": "#/components/schemas/APILibrary.Color"
           },
           "manufacturer": {
             "$ref": "#/components/schemas/Manufacturer"
@@ -815,7 +857,7 @@
         "type": "object",
         "properties": {
           "color": {
-            "$ref": "#/components/schemas/Color"
+            "$ref": "#/components/schemas/APILibrary.Color"
           },
           "manufacturer": {
             "$ref": "#/components/schemas/Manufacturer"
@@ -829,7 +871,7 @@
         "type": "object",
         "properties": {
           "color": {
-            "$ref": "#/components/schemas/Color"
+            "$ref": "#/components/schemas/APILibrary.Color"
           },
           "manufacturer": {
             "$ref": "#/components/schemas/Manufacturer"
@@ -837,60 +879,6 @@
         },
         "required": [
           "manufacturer"
-        ]
-      },
-      "Color": {
-        "type": "string",
-        "enum": [
-          "Red",
-          "Yellow",
-          "Purple",
-          "Green",
-          "Orange",
-          "Blue"
-        ]
-      },
-      "Error": {
-        "type": "object",
-        "properties": {
-          "error": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ErrorDetail"
-              }
-            ],
-            "description": "Top-level error object"
-          }
-        },
-        "description": "Error response",
-        "required": [
-          "error"
-        ]
-      },
-      "ErrorDetail": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "A server-defined code that uniquely identifies the error."
-          },
-          "message": {
-            "type": "string",
-            "description": "A human-readable representation of the error."
-          },
-          "details": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ErrorDetail"
-            },
-            "x-typespec-name": "ErrorDetail[]",
-            "description": "An array of details about specific errors that led to this reported error."
-          }
-        },
-        "description": "Error details",
-        "required": [
-          "code",
-          "message"
         ]
       },
       "Gadget": {
@@ -915,7 +903,7 @@
                 ]
               }
             ],
-            "x-typespec-name": "Color.Yellow | Color.Green"
+            "x-typespec-name": "APILibrary.Color.Yellow | APILibrary.Color.Green"
           }
         },
         "required": [
@@ -949,7 +937,7 @@
                 ]
               }
             ],
-            "x-typespec-name": "Color.Yellow | Color.Green"
+            "x-typespec-name": "APILibrary.Color.Yellow | APILibrary.Color.Green"
           }
         },
         "required": [
@@ -983,7 +971,7 @@
                 ]
               }
             ],
-            "x-typespec-name": "Color.Yellow | Color.Green"
+            "x-typespec-name": "APILibrary.Color.Yellow | APILibrary.Color.Green"
           }
         },
         "required": [
@@ -1115,7 +1103,7 @@
             "format": "float"
           },
           "color": {
-            "$ref": "#/components/schemas/Color"
+            "$ref": "#/components/schemas/APILibrary.Color"
           }
         },
         "required": [
@@ -1140,7 +1128,7 @@
             "format": "float"
           },
           "color": {
-            "$ref": "#/components/schemas/Color"
+            "$ref": "#/components/schemas/APILibrary.Color"
           }
         },
         "required": [
@@ -1165,7 +1153,7 @@
             "format": "float"
           },
           "color": {
-            "$ref": "#/components/schemas/Color"
+            "$ref": "#/components/schemas/APILibrary.Color"
           }
         },
         "required": [
