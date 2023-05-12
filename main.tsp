@@ -63,7 +63,8 @@ model WingDing extends BaseThingymajig {
 }
 
 // Operations
-
+// Notice that the custom routes now have an error
+// This is because our linter is catching the fact that we do not have an api version as a query param!
 // Resource Interfaces
 @route("/widgets")
 @tag("Widgets")

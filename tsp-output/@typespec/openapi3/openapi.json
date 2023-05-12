@@ -83,7 +83,11 @@
           "Gadgets"
         ],
         "operationId": "GadgetsInterface_createGadget",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -610,6 +614,9 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
           }
         ],
         "responses": {
