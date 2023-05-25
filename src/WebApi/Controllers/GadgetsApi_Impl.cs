@@ -7,7 +7,7 @@ namespace WebApi.Functions
     public partial class GadgetsApiController
     { 
 
-        private IActionResult _GadgetsInterfaceGetGadgets([FromQuery][Required()]string apiVersion)
+        private IActionResult _GadgetsInterfaceGetGadgets(string apiVersion)
         {
             var manufactorer = new Manufacturer
             {

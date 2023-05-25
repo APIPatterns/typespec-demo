@@ -36,7 +36,7 @@ namespace WebApi.Functions
         /// <response code="0">An unexpected error response.</response>
         [HttpDelete]
         [Route("wingdings/{id}")]
-        public IActionResult WingDingInterfaceDeleteWingDing(string id, [FromQuery][Required()]string apiVersion)
+        public IActionResult WingDingInterfaceDeleteWingDing(string id, [FromQuery(Name = "api-version")][Required()]string apiVersion)
         {
             var method = this.GetType().GetMethod("_WingDingInterfaceDeleteWingDing", BindingFlags.NonPublic | BindingFlags.Instance);
             if(method == null)
@@ -55,7 +55,7 @@ namespace WebApi.Functions
         /// <response code="0">An unexpected error response.</response>
         [HttpGet]
         [Route("wingdings/{id}")]
-        public IActionResult WingDingInterfaceGetWingDing(string id, [FromQuery][Required()]string apiVersion)
+        public IActionResult WingDingInterfaceGetWingDing(string id, [FromQuery(Name = "api-version")][Required()]string apiVersion)
         {
             var method = this.GetType().GetMethod("_WingDingInterfaceGetWingDing", BindingFlags.NonPublic | BindingFlags.Instance);
             if(method == null)
@@ -73,7 +73,7 @@ namespace WebApi.Functions
         /// <response code="0">An unexpected error response.</response>
         [HttpGet]
         [Route("wingdings")]
-        public IActionResult WingDingInterfaceGetWingDings([FromQuery][Required()]string apiVersion)
+        public IActionResult WingDingInterfaceGetWingDings([FromQuery(Name = "api-version")][Required()]string apiVersion)
         {
             var method = this.GetType().GetMethod("_WingDingInterfaceGetWingDings", BindingFlags.NonPublic | BindingFlags.Instance);
             if(method == null)
