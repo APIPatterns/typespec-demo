@@ -41,7 +41,7 @@ namespace WebApi.Models
         /// Gets or Sets Color
         /// </summary>
         [DataMember(Name="color", EmitDefaultValue=false)]
-        public GadgetsInterfaceUpdateGadgetRequestColor Color { get; set; }
+        public GadgetColors Color { get; set; }
 
         /// <summary>
         /// Gets or Sets Manufacturer

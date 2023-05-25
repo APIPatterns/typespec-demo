@@ -237,21 +237,7 @@
                     "format": "int32"
                   },
                   "color": {
-                    "anyOf": [
-                      {
-                        "type": "string",
-                        "enum": [
-                          "Yellow"
-                        ]
-                      },
-                      {
-                        "type": "string",
-                        "enum": [
-                          "Green"
-                        ]
-                      }
-                    ],
-                    "x-typespec-name": "APILibrary.Color.Yellow | APILibrary.Color.Green"
+                    "$ref": "#/components/schemas/gadgetColors"
                   },
                   "manufacturer": {
                     "$ref": "#/components/schemas/ManufacturerUpdate"
@@ -939,21 +925,7 @@
             "format": "int32"
           },
           "color": {
-            "anyOf": [
-              {
-                "type": "string",
-                "enum": [
-                  "Yellow"
-                ]
-              },
-              {
-                "type": "string",
-                "enum": [
-                  "Green"
-                ]
-              }
-            ],
-            "x-typespec-name": "APILibrary.Color.Yellow | APILibrary.Color.Green"
+            "$ref": "#/components/schemas/gadgetColors"
           }
         },
         "required": [
@@ -973,21 +945,7 @@
             "format": "int32"
           },
           "color": {
-            "anyOf": [
-              {
-                "type": "string",
-                "enum": [
-                  "Yellow"
-                ]
-              },
-              {
-                "type": "string",
-                "enum": [
-                  "Green"
-                ]
-              }
-            ],
-            "x-typespec-name": "APILibrary.Color.Yellow | APILibrary.Color.Green"
+            "$ref": "#/components/schemas/gadgetColors"
           }
         },
         "required": [
@@ -1007,21 +965,7 @@
             "format": "int32"
           },
           "color": {
-            "anyOf": [
-              {
-                "type": "string",
-                "enum": [
-                  "Yellow"
-                ]
-              },
-              {
-                "type": "string",
-                "enum": [
-                  "Green"
-                ]
-              }
-            ],
-            "x-typespec-name": "APILibrary.Color.Yellow | APILibrary.Color.Green"
+            "$ref": "#/components/schemas/gadgetColors"
           }
         },
         "required": [
@@ -1213,6 +1157,22 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/BaseThingymajigCreateOrUpdate"
+          }
+        ]
+      },
+      "gadgetColors": {
+        "oneOf": [
+          {
+            "type": "string",
+            "enum": [
+              "Yellow"
+            ]
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Green"
+            ]
           }
         ]
       },

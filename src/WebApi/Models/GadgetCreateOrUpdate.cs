@@ -41,8 +41,8 @@ namespace WebApi.Models
         /// <summary>
         /// Gets or Sets Color
         /// </summary>
-        [DataMember(Name="color", EmitDefaultValue=true)]
-        public AnyOfstringstring Color { get; set; }
+        [DataMember(Name="color", EmitDefaultValue=false)]
+        public GadgetColors Color { get; set; }
 
         /// <summary>
         /// Gets or Sets Manufacturer
