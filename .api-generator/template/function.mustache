@@ -1,0 +1,65 @@
+{{>partial_header}}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+{{#operationResultTask}}
+using System.Threading;
+using System.Threading.Tasks;
+{{/operationResultTask}}
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+{{^isLibrary}}
+using System.Text.Json;
+{{/isLibrary}}
+using {{modelPackage}};
+using System.Net;
+using System.Reflection;
+
+namespace {{apiPackage}}
+{ {{#operations}}
+    /// <summary>
+    /// {{description}}
+    /// </summary>{{#description}}
+    [Description("{{.}}")]{{/description}}
+    [ApiController]
+    public partial {{#classModifier}}{{.}} {{/classModifier}}class {{classname}}Controller : ControllerBase
+    { {{#operation}}
+        /// <summary>
+        /// {{summary}}
+        /// </summary>{{#notes}}
+        /// <remarks>{{.}}</remarks>{{/notes}}{{#allParams}}
+        /// <param name="{{paramName}}">{{description}}{{#isDeprecated}} (deprecated){{/isDeprecated}}</param>{{/allParams}}{{#operationResultTask}}{{#operationIsAsync}}
+        /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>{{/operationIsAsync}}{{/operationResultTask}}{{#responses}}
+        /// <response code="{{code}}">{{message}}</response>{{/responses}}
+        [Http{{httpMethod}}]
+        [Route("{{{basePathWithoutHost}}}{{{path}}}")]
+{{#authMethods}}
+{{#isApiKey}}
+        [Authorize(Policy = "{{name}}")]
+{{/isApiKey}}
+{{#isBasicBearer}}
+        [Authorize{{#scopes}}{{#-first}}(Roles = "{{/-first}}{{scope}}{{^-last}},{{/-last}}{{#-last}}"){{/-last}}{{/scopes}}]
+{{/isBasicBearer}}
+{{/authMethods}}
+        {{#vendorExtensions.x-aspnetcore-consumes}}
+        [Consumes({{&vendorExtensions.x-aspnetcore-consumes}})]
+        {{/vendorExtensions.x-aspnetcore-consumes}}
+        {{#isDeprecated}}
+        [Obsolete]
+        {{/isDeprecated}}
+        public {{#operationResultTask}}{{#operationIsAsync}}async {{/operationIsAsync}}Task<{{/operationResultTask}}IActionResult{{#operationResultTask}}>{{/operationResultTask}} {{operationId}}({{#allParams}}{{>pathParam}}{{>queryParam}}{{>bodyParam}}{{>formParam}}{{>headerParam}}{{^-last}}{{^isCookieParam}}, {{/isCookieParam}}{{/-last}}{{#-last}}{{#operationResultTask}}{{#operationIsAsync}}, {{/operationIsAsync}}{{/operationResultTask}}{{/-last}}{{/allParams}}{{#operationResultTask}}{{#operationIsAsync}}CancellationToken cancellationToken{{/operationIsAsync}}{{/operationResultTask}}){{^generateBody}};{{/generateBody}}
+        {{#generateBody}}
+        {
+            var method = this.GetType().GetMethod("_{{operationId}}", BindingFlags.NonPublic | BindingFlags.Instance);
+            if(method == null)
+            {
+                return new StatusCodeResult((int)HttpStatusCode.NotImplemented);
+            }
+            return (ActionResult){{#operationIsAsync}}await ((Task<{{{returnType}}}>){{/operationIsAsync}}method.Invoke(this, new object[] { {{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}} }){{#operationIsAsync}}).ConfigureAwait(false){{/operationIsAsync}};
+        }
+        {{/generateBody}}
+        {{/operation}}
+    }
+{{/operations}}
+}

@@ -2,5 +2,7 @@ emit:
   - "@typespec/openapi3"
 
 options:
-  "@typespec/openapi3" :
+  "@typespec/openapi3":
     file-type: json
+    emitter-output-dir: "{cwd}/src/WebApi/spec"
+  

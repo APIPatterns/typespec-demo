@@ -1,0 +1,17 @@
+
+        /// <summary>
+        /// {{^description}}Gets or Sets {{{name}}}{{/description}}{{{description}}}
+        /// </summary>
+        {{#description}}
+        /// <value>{{{.}}}</value>
+        {{/description}}
+        public enum {{datatypeWithEnum}}{{^datatypeWithEnum}}{{classname}}{{/datatypeWithEnum}}
+        {
+            {{#allowableValues}}{{#enumVars}}
+            /// <summary>
+            /// Enum {{name}} for {{{value}}}
+            /// </summary>
+            {{#isString}}[EnumMember(Value = "{{{value}}}")]{{/isString}}
+            {{name}}{{^isString}} = {{{value}}}{{/isString}}{{#isString}} = {{-index}}{{/isString}}{{^-last}},
+            {{/-last}}{{/enumVars}}{{/allowableValues}}
+        }

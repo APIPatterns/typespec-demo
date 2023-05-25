@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: contonso-webapi
+metadata:
+  template: csharp-webapi@0.0.1-beta
+services:
+  webapi:
+    project: ./src/WebApi
+    dist: build
+    language: csharp
+    host: containerapp
+    module: ./app/webapi
+    docker:
+      path: ../Dockerfile
+      context: ../

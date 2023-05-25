@@ -1,0 +1,15 @@
+{
+    "packageName": "WebApi",
+    "generatorName": "csharp-netcore-functions",
+    "templatePath": "./.api-generator/template",
+    "movables": [
+        {
+            "from": "/src/WebApi/Functions",
+            "to": "/Controllers"
+        },
+        {
+            "from": "/src/WebApi/Models",
+            "to": "/Models"
+        }
+    ]
+}

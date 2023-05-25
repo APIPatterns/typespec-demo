@@ -1,0 +1,1237 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Widget Service",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Widgets"
+    },
+    {
+      "name": "Gadgets"
+    },
+    {
+      "name": "WingDing"
+    }
+  ],
+  "paths": {
+    "/gadgets": {
+      "get": {
+        "tags": [
+          "Gadgets"
+        ],
+        "operationId": "GadgetsInterface_getGadgets",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Gadget"
+                      },
+                      "x-typespec-name": "Gadget[]",
+                      "description": "List of elements"
+                    },
+                    "nextLink": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "A link to the next page of results if present."
+                    }
+                  },
+                  "required": [
+                    "value"
+                  ],
+                  "x-typespec-name": "APILibrary.List<Gadget>"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APILibrary.Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Gadgets"
+        ],
+        "operationId": "GadgetsInterface_createGadget",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Gadget"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APILibrary.Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GadgetCreate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gadgets/{id}": {
+      "get": {
+        "tags": [
+          "Gadgets"
+        ],
+        "operationId": "GadgetsInterface_getGadgetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Gadget"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APILibrary.Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Gadgets"
+        ],
+        "operationId": "GadgetsInterface_updateGadget",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Gadget"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APILibrary.Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/merge-patch+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "maxRPM": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "color": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "enum": [
+                          "Yellow"
+                        ]
+                      },
+                      {
+                        "type": "string",
+                        "enum": [
+                          "Green"
+                        ]
+                      }
+                    ],
+                    "x-typespec-name": "APILibrary.Color.Yellow | APILibrary.Color.Green"
+                  },
+                  "manufacturer": {
+                    "$ref": "#/components/schemas/ManufacturerUpdate"
+                  }
+                },
+                "x-typespec-name": "APILibrary.MergePatch<Gadget>"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Gadgets"
+        ],
+        "operationId": "GadgetsInterface_deleteGadget",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APILibrary.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/widgets": {
+      "get": {
+        "tags": [
+          "Widgets"
+        ],
+        "operationId": "WidgetsInterface_list",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Widget"
+                      },
+                      "x-typespec-name": "Widget[]",
+                      "description": "List of elements"
+                    },
+                    "nextLink": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "A link to the next page of results if present."
+                    }
+                  },
+                  "required": [
+                    "value"
+                  ],
+                  "x-typespec-name": "APILibrary.List<Widget>"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APILibrary.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/widgets/{id}": {
+      "get": {
+        "tags": [
+          "Widgets"
+        ],
+        "operationId": "WidgetsInterface_read",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Widget"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APILibrary.Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Widgets"
+        ],
+        "operationId": "WidgetsInterface_create",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Widget"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APILibrary.Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WidgetCreateOrUpdate"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Widgets"
+        ],
+        "operationId": "WidgetsInterface_update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Widget"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APILibrary.Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/merge-patch+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "weight": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "color": {
+                    "$ref": "#/components/schemas/widgetColors"
+                  },
+                  "manufacturer": {
+                    "$ref": "#/components/schemas/ManufacturerUpdate"
+                  }
+                },
+                "x-typespec-name": "APILibrary.MergePatch<Widget>"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Widgets"
+        ],
+        "operationId": "WidgetsInterface_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APILibrary.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/widgets/{id}/analyze": {
+      "post": {
+        "tags": [
+          "Widgets"
+        ],
+        "operationId": "WidgetsInterface_analyze",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APILibrary.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/wingdings": {
+      "get": {
+        "tags": [
+          "WingDing"
+        ],
+        "operationId": "WingDingInterface_getWingDings",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/WingDing"
+                      },
+                      "x-typespec-name": "WingDing[]",
+                      "description": "List of elements"
+                    },
+                    "nextLink": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "A link to the next page of results if present."
+                    }
+                  },
+                  "required": [
+                    "value"
+                  ],
+                  "x-typespec-name": "APILibrary.List<WingDing>"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APILibrary.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/wingdings/{id}": {
+      "get": {
+        "tags": [
+          "WingDing"
+        ],
+        "operationId": "WingDingInterface_getWingDing",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WingDing"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APILibrary.Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WingDing"
+        ],
+        "operationId": "WingDingInterface_deleteWingDing",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/APILibrary.ApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": true,
+                "description": "A server-defined code that uniquely identifies the error.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APILibrary.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "APILibrary.ApiVersion": {
+        "name": "api-version",
+        "in": "query",
+        "required": true,
+        "description": "The version of the API in the form YYYY-MM-DD",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "schemas": {
+      "APILibrary.Color": {
+        "type": "string",
+        "enum": [
+          "Red",
+          "Yellow",
+          "Purple",
+          "Green",
+          "Orange",
+          "Blue"
+        ]
+      },
+      "APILibrary.Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/APILibrary.ErrorDetail"
+              }
+            ],
+            "description": "Top-level error object"
+          }
+        },
+        "description": "Error response",
+        "required": [
+          "error"
+        ]
+      },
+      "APILibrary.ErrorDetail": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "A server-defined code that uniquely identifies the error."
+          },
+          "message": {
+            "type": "string",
+            "description": "A human-readable representation of the error."
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/APILibrary.ErrorDetail"
+            },
+            "x-typespec-name": "APILibrary.ErrorDetail[]",
+            "description": "An array of details about specific errors that led to this reported error."
+          }
+        },
+        "description": "Error details",
+        "required": [
+          "code",
+          "message"
+        ]
+      },
+      "BaseThingymajig": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "color": {
+            "$ref": "#/components/schemas/APILibrary.Color"
+          },
+          "manufacturer": {
+            "$ref": "#/components/schemas/Manufacturer"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time that the resource was created",
+            "readOnly": true
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time that the resource was last updated",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "id",
+          "manufacturer",
+          "createdOn",
+          "updatedOn"
+        ]
+      },
+      "BaseThingymajigCreate": {
+        "type": "object",
+        "properties": {
+          "color": {
+            "$ref": "#/components/schemas/APILibrary.Color"
+          },
+          "manufacturer": {
+            "$ref": "#/components/schemas/Manufacturer"
+          }
+        },
+        "required": [
+          "manufacturer"
+        ]
+      },
+      "BaseThingymajigCreateOrUpdate": {
+        "type": "object",
+        "properties": {
+          "color": {
+            "$ref": "#/components/schemas/APILibrary.Color"
+          },
+          "manufacturer": {
+            "$ref": "#/components/schemas/Manufacturer"
+          }
+        },
+        "required": [
+          "manufacturer"
+        ]
+      },
+      "Gadget": {
+        "type": "object",
+        "properties": {
+          "maxRPM": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "color": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "Yellow"
+                ]
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "Green"
+                ]
+              }
+            ],
+            "x-typespec-name": "APILibrary.Color.Yellow | APILibrary.Color.Green"
+          }
+        },
+        "required": [
+          "maxRPM"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseThingymajig"
+          }
+        ]
+      },
+      "GadgetCreate": {
+        "type": "object",
+        "properties": {
+          "maxRPM": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "color": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "Yellow"
+                ]
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "Green"
+                ]
+              }
+            ],
+            "x-typespec-name": "APILibrary.Color.Yellow | APILibrary.Color.Green"
+          }
+        },
+        "required": [
+          "maxRPM"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseThingymajigCreate"
+          }
+        ]
+      },
+      "GadgetCreateOrUpdate": {
+        "type": "object",
+        "properties": {
+          "maxRPM": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "color": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "Yellow"
+                ]
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "Green"
+                ]
+              }
+            ],
+            "x-typespec-name": "APILibrary.Color.Yellow | APILibrary.Color.Green"
+          }
+        },
+        "required": [
+          "maxRPM"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseThingymajigCreateOrUpdate"
+          }
+        ]
+      },
+      "Manufacturer": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "address"
+        ]
+      },
+      "ManufacturerUpdate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          }
+        }
+      },
+      "ResourceMetadata": {
+        "type": "object",
+        "properties": {
+          "createdOn": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time that the resource was created",
+            "readOnly": true
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time that the resource was last updated",
+            "readOnly": true
+          }
+        },
+        "description": "Common metadata for resources",
+        "required": [
+          "createdOn",
+          "updatedOn"
+        ]
+      },
+      "Widget": {
+        "type": "object",
+        "properties": {
+          "weight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "color": {
+            "$ref": "#/components/schemas/widgetColors"
+          }
+        },
+        "required": [
+          "weight"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseThingymajig"
+          }
+        ]
+      },
+      "WidgetCreate": {
+        "type": "object",
+        "properties": {
+          "weight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "color": {
+            "$ref": "#/components/schemas/widgetColors"
+          }
+        },
+        "required": [
+          "weight"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseThingymajigCreate"
+          }
+        ]
+      },
+      "WidgetCreateOrUpdate": {
+        "type": "object",
+        "properties": {
+          "weight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "color": {
+            "$ref": "#/components/schemas/widgetColors"
+          }
+        },
+        "required": [
+          "weight"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseThingymajigCreateOrUpdate"
+          }
+        ]
+      },
+      "WingDing": {
+        "type": "object",
+        "properties": {
+          "height": {
+            "type": "number",
+            "format": "float"
+          },
+          "width": {
+            "type": "number",
+            "format": "float"
+          },
+          "color": {
+            "$ref": "#/components/schemas/APILibrary.Color"
+          }
+        },
+        "required": [
+          "height",
+          "width"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseThingymajig"
+          }
+        ]
+      },
+      "WingDingCreate": {
+        "type": "object",
+        "properties": {
+          "height": {
+            "type": "number",
+            "format": "float"
+          },
+          "width": {
+            "type": "number",
+            "format": "float"
+          },
+          "color": {
+            "$ref": "#/components/schemas/APILibrary.Color"
+          }
+        },
+        "required": [
+          "height",
+          "width"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseThingymajigCreate"
+          }
+        ]
+      },
+      "WingDingCreateOrUpdate": {
+        "type": "object",
+        "properties": {
+          "height": {
+            "type": "number",
+            "format": "float"
+          },
+          "width": {
+            "type": "number",
+            "format": "float"
+          },
+          "color": {
+            "$ref": "#/components/schemas/APILibrary.Color"
+          }
+        },
+        "required": [
+          "height",
+          "width"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseThingymajigCreateOrUpdate"
+          }
+        ]
+      },
+      "widgetColors": {
+        "oneOf": [
+          {
+            "type": "string",
+            "enum": [
+              "Red"
+            ]
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Blue"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

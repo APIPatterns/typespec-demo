@@ -1,0 +1,41 @@
+{
+  "profiles": {
+    "WebApi": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "health/live",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ApiHostName": "localhost",
+        "ApiName": "API1",
+        "Healthy": "true",
+        "ReturnErrors": "false"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://localhost:5100/"
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "health/live",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/health/ready",
+      "publishAllPorts": true
+    }
+  },
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:57982",
+      "sslPort": 0
+    }
+  }
+}
