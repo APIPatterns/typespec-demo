@@ -5,17 +5,21 @@ Pre-requisites:
 - Docker installed on the machine that will run the devcontainer
 - Remote containers extension installed in VSCode
 
-Steps
+## Build the service
 - azd init --template https://github.com/APIPatterns/typespec-demo-api-service
 - azd provision
 - open in dev container
 - run genny.sh
   - `./.api-generator/genny.sh --typespec-file main.tsp`
   - Note: may need to chmod to make it executable 
+
+### Create the sample implementation
 - create api sample implementation
 
-
 - azd deploy
+
+
+## Client
 - new python client
 - generate client library from deployed api spec
 - create main.py to show working api/client in practice
