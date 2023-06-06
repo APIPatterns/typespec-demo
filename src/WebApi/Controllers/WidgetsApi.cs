@@ -56,7 +56,7 @@ namespace WebApi.Functions
         [HttpPut]
         [Route("widgets/{id}")]
         [Consumes("application/json")]
-        public IActionResult WidgetsInterfaceCreate(string id, [FromQuery][Required()]string apiVersion, [FromBody]WidgetCreateOrUpdate widgetCreateOrUpdate)
+        public IActionResult WidgetsInterfaceCreate(string id, [FromQuery(Name = "api-version")][Required()]string apiVersion, [FromBody]WidgetCreateOrUpdate widgetCreateOrUpdate)
         {
             var method = this.GetType().GetMethod("_WidgetsInterfaceCreate", BindingFlags.NonPublic | BindingFlags.Instance);
             if(method == null)
@@ -75,7 +75,7 @@ namespace WebApi.Functions
         /// <response code="0">An unexpected error response.</response>
         [HttpDelete]
         [Route("widgets/{id}")]
-        public IActionResult WidgetsInterfaceDelete(string id, [FromQuery][Required()]string apiVersion)
+        public IActionResult WidgetsInterfaceDelete(string id, [FromQuery(Name = "api-version")][Required()]string apiVersion)
         {
             var method = this.GetType().GetMethod("_WidgetsInterfaceDelete", BindingFlags.NonPublic | BindingFlags.Instance);
             if(method == null)
@@ -93,7 +93,7 @@ namespace WebApi.Functions
         /// <response code="0">An unexpected error response.</response>
         [HttpGet]
         [Route("widgets")]
-        public IActionResult WidgetsInterfaceList([FromQuery][Required()]string apiVersion)
+        public IActionResult WidgetsInterfaceList([FromQuery(Name = "api-version")][Required()]string apiVersion)
         {
             var method = this.GetType().GetMethod("_WidgetsInterfaceList", BindingFlags.NonPublic | BindingFlags.Instance);
             if(method == null)
@@ -112,7 +112,7 @@ namespace WebApi.Functions
         /// <response code="0">An unexpected error response.</response>
         [HttpGet]
         [Route("widgets/{id}")]
-        public IActionResult WidgetsInterfaceRead(string id, [FromQuery][Required()]string apiVersion)
+        public IActionResult WidgetsInterfaceRead(string id, [FromQuery(Name = "api-version")][Required()]string apiVersion)
         {
             var method = this.GetType().GetMethod("_WidgetsInterfaceRead", BindingFlags.NonPublic | BindingFlags.Instance);
             if(method == null)
@@ -133,7 +133,7 @@ namespace WebApi.Functions
         [HttpPatch]
         [Route("widgets/{id}")]
         [Consumes("application/merge-patch+json")]
-        public IActionResult WidgetsInterfaceUpdate(string id, [FromQuery][Required()]string apiVersion, [FromBody]WidgetsInterfaceUpdateRequest widgetsInterfaceUpdateRequest)
+        public IActionResult WidgetsInterfaceUpdate(string id, [FromQuery(Name = "api-version")][Required()]string apiVersion, [FromBody]WidgetsInterfaceUpdateRequest widgetsInterfaceUpdateRequest)
         {
             var method = this.GetType().GetMethod("_WidgetsInterfaceUpdate", BindingFlags.NonPublic | BindingFlags.Instance);
             if(method == null)

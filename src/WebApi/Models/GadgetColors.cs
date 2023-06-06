@@ -23,7 +23,7 @@ namespace WebApi.Models
     /// 
     /// </summary>
     [DataContract]
-    public partial class GadgetCreate : IEquatable<GadgetCreate>
+    public partial class GadgetColors : IEquatable<GadgetColors>
     {
         private JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions
         {
@@ -31,25 +31,6 @@ namespace WebApi.Models
             WriteIndented = true
         };
 
-        /// <summary>
-        /// Gets or Sets MaxRPM
-        /// </summary>
-        [Required]
-        [DataMember(Name="maxRPM", EmitDefaultValue=false)]
-        public int MaxRPM { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Color
-        /// </summary>
-        [DataMember(Name="color", EmitDefaultValue=false)]
-        public GadgetColors Color { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Manufacturer
-        /// </summary>
-        [Required]
-        [DataMember(Name="manufacturer", EmitDefaultValue=false)]
-        public Manufacturer Manufacturer { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -58,10 +39,7 @@ namespace WebApi.Models
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class GadgetCreate {\n");
-            sb.Append("  MaxRPM: ").Append(MaxRPM).Append("\n");
-            sb.Append("  Color: ").Append(Color).Append("\n");
-            sb.Append("  Manufacturer: ").Append(Manufacturer).Append("\n");
+            sb.Append("class GadgetColors {\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -84,35 +62,20 @@ namespace WebApi.Models
         {
             if (obj is null) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((GadgetCreate)obj);
+            return obj.GetType() == GetType() && Equals((GadgetColors)obj);
         }
 
         /// <summary>
-        /// Returns true if GadgetCreate instances are equal
+        /// Returns true if GadgetColors instances are equal
         /// </summary>
-        /// <param name="other">Instance of GadgetCreate to be compared</param>
+        /// <param name="other">Instance of GadgetColors to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(GadgetCreate other)
+        public bool Equals(GadgetColors other)
         {
             if (other is null) return false;
             if (ReferenceEquals(this, other)) return true;
 
-            return 
-                (
-                    MaxRPM == other.MaxRPM ||
-                    
-                    MaxRPM.Equals(other.MaxRPM)
-                ) && 
-                (
-                    Color == other.Color ||
-                    Color != null &&
-                    Color.Equals(other.Color)
-                ) && 
-                (
-                    Manufacturer == other.Manufacturer ||
-                    Manufacturer != null &&
-                    Manufacturer.Equals(other.Manufacturer)
-                );
+            return false;
         }
 
         /// <summary>
@@ -125,12 +88,6 @@ namespace WebApi.Models
             {
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
-                    
-                    hashCode = hashCode * 59 + MaxRPM.GetHashCode();
-                    if (Color != null)
-                    hashCode = hashCode * 59 + Color.GetHashCode();
-                    if (Manufacturer != null)
-                    hashCode = hashCode * 59 + Manufacturer.GetHashCode();
                 return hashCode;
             }
         }
@@ -138,12 +95,12 @@ namespace WebApi.Models
         #region Operators
         #pragma warning disable 1591
 
-        public static bool operator ==(GadgetCreate left, GadgetCreate right)
+        public static bool operator ==(GadgetColors left, GadgetColors right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(GadgetCreate left, GadgetCreate right)
+        public static bool operator !=(GadgetColors left, GadgetColors right)
         {
             return !Equals(left, right);
         }

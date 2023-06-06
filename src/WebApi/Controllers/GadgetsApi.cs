@@ -55,7 +55,7 @@ namespace WebApi.Functions
         /// <response code="0">An unexpected error response.</response>
         [HttpDelete]
         [Route("gadgets/{id}")]
-        public IActionResult GadgetsInterfaceDeleteGadget(string id, [FromQuery][Required()]string apiVersion)
+        public IActionResult GadgetsInterfaceDeleteGadget(string id, [FromQuery(Name = "api-version")][Required()]string apiVersion)
         {
             var method = this.GetType().GetMethod("_GadgetsInterfaceDeleteGadget", BindingFlags.NonPublic | BindingFlags.Instance);
             if(method == null)
@@ -74,7 +74,7 @@ namespace WebApi.Functions
         /// <response code="0">An unexpected error response.</response>
         [HttpGet]
         [Route("gadgets/{id}")]
-        public IActionResult GadgetsInterfaceGetGadgetById(string id, [FromQuery][Required()]string apiVersion)
+        public IActionResult GadgetsInterfaceGetGadgetById(string id, [FromQuery(Name = "api-version")][Required()]string apiVersion)
         {
             var method = this.GetType().GetMethod("_GadgetsInterfaceGetGadgetById", BindingFlags.NonPublic | BindingFlags.Instance);
             if(method == null)
@@ -92,7 +92,7 @@ namespace WebApi.Functions
         /// <response code="0">An unexpected error response.</response>
         [HttpGet]
         [Route("gadgets")]
-        public IActionResult GadgetsInterfaceGetGadgets([FromQuery][Required()]string apiVersion)
+        public IActionResult GadgetsInterfaceGetGadgets([FromQuery(Name = "api-version")][Required()]string apiVersion)
         {
             var method = this.GetType().GetMethod("_GadgetsInterfaceGetGadgets", BindingFlags.NonPublic | BindingFlags.Instance);
             if(method == null)
@@ -113,7 +113,7 @@ namespace WebApi.Functions
         [HttpPatch]
         [Route("gadgets/{id}")]
         [Consumes("application/merge-patch+json")]
-        public IActionResult GadgetsInterfaceUpdateGadget(string id, [FromQuery][Required()]string apiVersion, [FromBody]GadgetsInterfaceUpdateGadgetRequest gadgetsInterfaceUpdateGadgetRequest)
+        public IActionResult GadgetsInterfaceUpdateGadget(string id, [FromQuery(Name = "api-version")][Required()]string apiVersion, [FromBody]GadgetsInterfaceUpdateGadgetRequest gadgetsInterfaceUpdateGadgetRequest)
         {
             var method = this.GetType().GetMethod("_GadgetsInterfaceUpdateGadget", BindingFlags.NonPublic | BindingFlags.Instance);
             if(method == null)
