@@ -1,7 +1,7 @@
 import "@typespec/http";
 import "@typespec/openapi3";
 import "./api-lib.tsp";
-import "./linter.js";
+// import "./linter.js";
 
 using TypeSpec.Http;
 using OpenAPI;
@@ -52,9 +52,12 @@ model Widget extends BaseThingymajig {
   color?: widgetColors;
 }
 
+@oneOf
+union gadgetColors{Yellow:Color.Yellow, Green: Color.Green};
+
 model Gadget extends BaseThingymajig {
   maxRPM: int32;
-  color?: Color.Yellow | Color.Green;
+  color?: gadgetColors;
 }
 
 model WingDing extends BaseThingymajig {
