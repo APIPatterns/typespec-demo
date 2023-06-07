@@ -1,6 +1,6 @@
 # TypeSpec Demo
 
-This repo contains a demo of the TypeSpec API Design language.
+This repo contains a demo of the TypeSpec API Design language. You can see a [step-by-step walk through of this TypeSpec demo](https://aka.ms/marktalkstypespec/typespec-demo) in Mark's interview by Josh from Zuplo. 
 
 ## Create a new TypeSpec project
 
