@@ -78,6 +78,11 @@ interface Gadgets extends ResourceInterface<Gadget> {
   @route("{id}/analyze") @post analyze(@path id: string): string | Error;
 }
 
+// Update WingDings to only have list, read, and delete methods
 @route("/wingdings")
 @tag("WingDings")
-interface WingDingInterface extends ResourceInterface<WingDing> {}
+interface WingDingInterface {
+  getWingDings is list<WingDing>;
+  getWingDing is read<WingDing>;
+  deleteWingDing is delete;
+}

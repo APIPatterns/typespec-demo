@@ -45,10 +45,22 @@ model Error {
   message: string;
 }
 
+// Add templates for individual operations
+@get op list<T>(): T[] | Error;
+
+@get op read<T>(@path id: string): T | Error;
+
+@post op create<T>(...T): T | Error;
+
+@patch op update<T>(...T): T | Error;
+
+@delete op delete(@path id: string): void | Error;
+
+// Leverage operation templates in ResourceInterface
 interface ResourceInterface<T> {
-  @get list(): T[] | Error;
-  @get read(@path id: string): T | Error;
-  @post create(...T): T | Error;
-  @patch update(...T): T | Error;
-  @delete delete(@path id: string): void | Error;
+  list is list<T>;
+  read is read<T>;
+  create is create<T>;
+  update is update<T>;
+  delete is delete;
 }
