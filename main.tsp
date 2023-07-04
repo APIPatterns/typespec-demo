@@ -10,7 +10,6 @@ using OpenAPI;
 })
 namespace DemoService;
 
-// Added a base model for common fields.
 model BaseThingymajig {
   @visibility("read", "update")
   @path
@@ -20,7 +19,6 @@ model BaseThingymajig {
   ...ResourceMetadata;
 }
 
-// Added an enumeration for color.
 enum Color {
   Red,
   Yellow,
@@ -30,13 +28,11 @@ enum Color {
   Blue,
 }
 
-// Added a model for manufacturer.
 model Manufacturer {
   name: string;
   address: string;
 }
 
-// Defined a common metadata model.
 @doc("Common metadata for resources")
 model ResourceMetadata {
   @doc("Date and time that the resource was created")
@@ -62,30 +58,44 @@ model Gadget extends BaseThingymajig {
   color?: Color.Yellow | Color.Green;
 }
 
+// Add a new WingDing model
+model WingDing extends BaseThingymajig {
+  height: float32;
+  width: float32;
+  color?: Color;
+}
+
 @error
 model Error {
   code: int32;
   message: string;
 }
 
+// Operations
+
+// Create a reusable ResourceInterface, with T parameter
+interface ResourceInterface<T> {
+  @get list(): T[] | Error;
+  @get read(@path id: string): T | Error;
+  @post create(...T): T | Error;
+  @patch update(...T): T | Error;
+  @delete delete(@path id: string): void | Error;
+}
+
+// Refactor Widgets and Gadgets to use new ResourceInterface
 @route("/widgets")
 @tag("Widgets")
-interface Widgets {
-  @get list(): Widget[] | Error;
-  @get read(@path id: string): Widget | Error;
-  @post create(...Widget): Widget | Error;
-  @patch update(...Widget): Widget | Error;
-  @delete delete(@path id: string): void | Error;
+interface Widgets extends ResourceInterface<Widget> {
   @route("{id}/analyze") @post analyze(@path id: string): string | Error;
 }
 
 @route("/gadgets")
 @tag("Gadgets")
-interface Gadgets {
-  @get list(): Gadget[] | Error;
-  @get read(@path id: string): Gadget | Error;
-  @post create(...Gadget): Gadget | Error;
-  @patch update(...Gadget): Gadget | Error;
-  @delete delete(@path id: string): void | Error;
+interface Gadgets extends ResourceInterface<Gadget> {
   @route("{id}/analyze") @post analyze(@path id: string): string | Error;
 }
+
+// Add operations for WingDings using the new ResourceInterface 
+@route("/wingdings")
+@tag("WingDings")
+interface WingDingInterface extends ResourceInterface<WingDing> {}
