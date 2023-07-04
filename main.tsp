@@ -1,6 +1,8 @@
 import "@typespec/http";
+import "@typespec/openapi3";
 
 using TypeSpec.Http;
+using OpenAPI;
 
 @service({
   title: "Widget Service",
@@ -8,23 +10,56 @@ using TypeSpec.Http;
 })
 namespace DemoService;
 
-model Widget {
+// Added a base model for common fields.
+model BaseThingymajig {
   @visibility("read", "update")
   @path
   id: string;
-
-  weight: int32;
-  color: "red" | "blue";
+  color?: Color;
+  manufacturer: Manufacturer;
+  ...ResourceMetadata;
 }
 
-// Add Gadgets model
-model Gadget {
-  @visibility("read", "update")
-  @path
-  id: string;
+// Added an enumeration for color.
+enum Color {
+  Red,
+  Yellow,
+  Purple,
+  Green,
+  Orange,
+  Blue,
+}
 
+// Added a model for manufacturer.
+model Manufacturer {
+  name: string;
+  address: string;
+}
+
+// Defined a common metadata model.
+@doc("Common metadata for resources")
+model ResourceMetadata {
+  @doc("Date and time that the resource was created")
+  @visibility("read")
+  createdOn: utcDateTime;
+  @doc("Date and time that the resource was last updated")
+  @visibility("read")
+  updatedOn: utcDateTime;
+}
+
+// oneOf decorator for union types
+@oneOf
+union widgetColors {Red:Color.Red, Blue: Color.Blue};
+
+// Now Widget and Gadget extend BaseThingamajig
+model Widget extends BaseThingymajig {
+  weight: int32;
+  color?: widgetColors;
+}
+
+model Gadget extends BaseThingymajig {
   maxRPM: int32;
-  color: "yellow" | "green";
+  color?: Color.Yellow | Color.Green;
 }
 
 @error
@@ -44,7 +79,6 @@ interface Widgets {
   @route("{id}/analyze") @post analyze(@path id: string): string | Error;
 }
 
-// Add Gadgets operations
 @route("/gadgets")
 @tag("Gadgets")
 interface Gadgets {
