@@ -1,5 +1,6 @@
 import "@typespec/http";
 import "@typespec/openapi3";
+import "./linter.js";
 
 using TypeSpec.Http;
 using OpenAPI;
