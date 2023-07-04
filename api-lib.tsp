@@ -39,24 +39,55 @@ model ResourceMetadata {
   updatedOn: utcDateTime;
 }
 
+// Common Error Model
 @error
+@doc("Error response")
 model Error {
-  code: int32;
-  message: string;
+  @doc("A server-defined code that uniquely identifies the error.")
+  @header("x-ms-error-code")
+  code: string;
+  @doc("Top-level error object")
+  error: ErrorDetail;
 }
 
-// Add templates for individual operations
-@get op list<T>(): T[] | Error;
+@doc("Error details")
+model ErrorDetail {
+  @doc("A server-defined code that uniquely identifies the error.")
+  code: string;
+  @doc("A human-readable representation of the error.")
+  message: string;
+  @doc("An array of details about specific errors that led to this reported error.")
+  details?: ErrorDetail[];
+}
 
-@get op read<T>(@path id: string): T | Error;
+// Each operation should have an api-version query parameter
+model ApiVersion {
+  @doc("The version of the API in the form YYYY-MM-DD")
+  @query("api-version") apiVersion: string;
+}
 
-@post op create<T>(...T): T | Error;
+// List operations should return an object with nextLink -- not a bare array
+model List<T> {
+  @doc("List of elements")
+  value: T[];
+  @doc("A link to the next page of results if present.")
+  nextLink?: url;
+}
+@get op list<T>(...ApiVersion): List<T> | Error;
 
-@patch op update<T>(...T): T | Error;
+@get op read<T>(@path id: string, ...ApiVersion): T | Error;
 
-@delete op delete(@path id: string): void | Error;
+@post op create<T>(...T, ...ApiVersion): T | Error;
 
-// Leverage operation templates in ResourceInterface
+// Patch operations should accept a json-merge+patch body
+model MergePatch<T> {
+  @header contentType: "application/merge-patch+json";
+  ...T;
+}
+@patch op update<T>(@body body: MergePatch<T>, ...ApiVersion): T | Error;
+
+@delete op delete(@path id: string, ...ApiVersion): void | Error;
+
 interface ResourceInterface<T> {
   list is list<T>;
   read is read<T>;
