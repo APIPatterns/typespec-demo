@@ -17,6 +17,16 @@ model Widget {
   color: "red" | "blue";
 }
 
+// Add Gadgets model
+model Gadget {
+  @visibility("read", "update")
+  @path
+  id: string;
+
+  maxRPM: int32;
+  color: "yellow" | "green";
+}
+
 @error
 model Error {
   code: int32;
@@ -30,6 +40,18 @@ interface Widgets {
   @get read(@path id: string): Widget | Error;
   @post create(...Widget): Widget | Error;
   @patch update(...Widget): Widget | Error;
+  @delete delete(@path id: string): void | Error;
+  @route("{id}/analyze") @post analyze(@path id: string): string | Error;
+}
+
+// Add Gadgets operations
+@route("/gadgets")
+@tag("Gadgets")
+interface Gadgets {
+  @get list(): Gadget[] | Error;
+  @get read(@path id: string): Gadget | Error;
+  @post create(...Gadget): Gadget | Error;
+  @patch update(...Gadget): Gadget | Error;
   @delete delete(@path id: string): void | Error;
   @route("{id}/analyze") @post analyze(@path id: string): string | Error;
 }
