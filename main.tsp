@@ -1,8 +1,10 @@
 import "@typespec/http";
 import "@typespec/openapi3";
+import "./api-lib.tsp";
 
 using TypeSpec.Http;
 using OpenAPI;
+using APILibrary;
 
 @service({
   title: "Widget Service",
@@ -56,31 +58,14 @@ model Gadget extends BaseThingymajig {
   color?: Color.Yellow | Color.Green;
 }
 
-// Add a new WingDing model
 model WingDing extends BaseThingymajig {
   height: float32;
   width: float32;
   color?: Color;
 }
 
-@error
-model Error {
-  code: int32;
-  message: string;
-}
-
 // Operations
 
-// Create a reusable ResourceInterface, with T parameter
-interface ResourceInterface<T> {
-  @get list(): T[] | Error;
-  @get read(@path id: string): T | Error;
-  @post create(...T): T | Error;
-  @patch update(...T): T | Error;
-  @delete delete(@path id: string): void | Error;
-}
-
-// Refactor Widgets and Gadgets to use new ResourceInterface
 @route("/widgets")
 @tag("Widgets")
 interface Widgets extends ResourceInterface<Widget> {
@@ -93,7 +78,6 @@ interface Gadgets extends ResourceInterface<Gadget> {
   @route("{id}/analyze") @post analyze(@path id: string): string | Error;
 }
 
-// Add operations for WingDings using the new ResourceInterface 
 @route("/wingdings")
 @tag("WingDings")
 interface WingDingInterface extends ResourceInterface<WingDing> {}
