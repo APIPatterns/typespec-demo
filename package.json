@@ -4,6 +4,7 @@
   "type": "module",
   "dependencies": {
     "@typespec/compiler": "0.47.1",
+    "@typespec/lint": "^0.47.0",
     "@typespec/openapi3": "0.47.0"
   },
   "private": true
