@@ -1,8 +1,10 @@
 import "@typespec/http";
 import "@typespec/openapi";
+import "./api-lib.tsp";
 
 using TypeSpec.Http;
 using OpenAPI;
+using APILibrary;
 
 @doc("The Contoso Widget Service API")
 @service({
@@ -28,14 +30,9 @@ model Widget {
   id: string;
 
   weight: int32;
-  color: "red" | "blue";
+  color: Colors.Red | Colors.Blue;
 
-  @doc("Date and time that the resource was created")
-  @visibility("read")
-  createdDateTime: utcDateTime;
-  @doc("Date and time that the resource was last updated")
-  @visibility("read")
-  updatedDateTime: utcDateTime;
+  ...ResourceMetadata;
 }
 
 model Gadget {
@@ -44,20 +41,9 @@ model Gadget {
   id: string;
 
   maxRPM: int32;
-  color?: "Blue" | "Yellow";
+  color?: Colors.Blue | Colors.Yellow;
 
-  @doc("Date and time that the resource was created")
-  @visibility("read")
-  createdOn: utcDateTime;
-  @doc("Date and time that the resource was last updated")
-  @visibility("read")
-  updatedOn: utcDateTime;
-}
-
-@error
-model Error {
-  code: int32;
-  message: string;
+  ...ResourceMetadata;
 }
 
 // Operations
@@ -66,20 +52,20 @@ model Error {
 @route("/widgets")
 @tag("Widgets")
 interface Widgets {
-  @get list(): Widget[] | Error;
-  @get read(@path id: string): Widget | Error;
-  @post create(...Widget): Widget | Error;
-  @patch update(...Widget): Widget | Error;
-  @delete delete(@path id: string): void | Error;
+  op list is list<Widget>;
+  op read is read<Widget>;
+  op create is create<Widget>;
+  op update is update<Widget>;
+  op delete is delete;
   @route("{id}/analyze") @post analyze(@path id: string): string | Error;
 }
 
 @route("/gadgets")
 @tag("Gadgets")
 interface Gadgets {
-  @get list(): Gadget[] | Error;
-  @get read(@path id: string): Gadget | Error;
-  @post create(...Gadget): Gadget | Error;
-  @patch update(...Gadget): Gadget | Error;
-  @delete delete(@path id: string): void | Error;
+  op list is list<Gadget>;
+  op read is read<Gadget>;
+  op create is create<Gadget>;
+  op update is update<Gadget>;
+  op delete is delete;
 }
